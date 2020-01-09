@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="BMC.View.HumidViewModel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BMC.View"
+             mc:Ignorable="d" 
+              d:DesignHeight="810" d:DesignWidth="240" >
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="b2v"/>
+    </UserControl.Resources>
+    <Grid Visibility="{Binding VisibleGrid, Converter={StaticResource b2v}}">
+        <Grid.RowDefinitions>
+        <RowDefinition Height="0.5*"></RowDefinition>
+
+        <RowDefinition Height="1.5*"></RowDefinition>
+        <RowDefinition Height="8*"></RowDefinition>
+
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+
+
+    </Grid.ColumnDefinitions>
+    <Label Grid.Row="0" Grid.Column="0" Content="Увлажнитель" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+
+
+    <StackPanel Grid.Row="1" Grid.Column="0" >
+        <Label Content="Тип увлажнителя" FontSize="16"/>
+            <ComboBox x:Name ="cbo1"  ItemsSource="{Binding HumidList}" SelectedItem ="{Binding SelectedValueHumidVar}"  >
+           
+        </ComboBox>
+    </StackPanel>
+        <ContentControl Grid.Row="2" Content="{Binding CurrentPageHumidViewModel, Mode=TwoWay}"/>
+
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="BMC.View.VentSettingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BMC.View"
+             xmlns:vm="clr-namespace:BMC.ViewModel"
+             mc:Ignorable="d" 
+              d:DesignHeight="810" d:DesignWidth="240" >
+    <UserControl.Resources>
+        <DataTemplate x:Name="VentSetTemplate" DataType="{x:Type vm:VentViewModel}">
+            <local:VentView/>
+        </DataTemplate>
+        <local:InverseBool x:Key="invB"/>
+        <local:IndexToVisibilityConverter1 x:Key="invC1"/>
+        <local:IndexToVisibilityConverter2 x:Key="invC2"/>
+        
+        <BooleanToVisibilityConverter x:Key="b2v"/>
+        <local:InvB2Vc x:Key="ib2v"/>
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+            
+        </Grid.RowDefinitions>
+            <StackPanel>
+                <StackPanel  Visibility="{Binding ElementName=Exhausted,Path=IsChecked,Converter={StaticResource ib2v}}">
+                <Label  Content="Основной приточный вентилятор" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ContentControl  Content="{Binding CurrentPageForcedViewModel}"/>
+            </StackPanel>
+            <StackPanel  Visibility="{Binding ElementName=Forced,Path=IsChecked,Converter={StaticResource ib2v}}">
+                <Label   Content="Основной вытяжной вентилятор" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ContentControl Content="{Binding CurrentPageExhaustedViewModel}"/>
+            </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

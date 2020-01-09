@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="BMC.View.SettingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BMC.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="810" d:DesignWidth="240" >
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="b2v"/>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel Margin="10">
+            <CheckBox x:Name="cb1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" IsChecked="{Binding PhaseCheck}">
+                <TextBlock Text="Реле контроля фаз" FontSize="12"/>
+            </CheckBox>
+            <CheckBox x:Name="cb2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" IsChecked="{Binding OperatorPanel}">
+                <TextBlock Text="Панель оператора" FontSize="12"/>
+            </CheckBox>
+            <CheckBox x:Name="cb3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" IsChecked="{Binding TempOut}">
+                <TextBlock Text="Датчик наружней температуры" FontSize="12"/>
+            </CheckBox>
+            <CheckBox x:Name="cb4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" IsChecked="{Binding TempIn}">
+                <TextBlock Text="Комнатный датчик температуры" FontSize="12"/>
+            </CheckBox>
+            <CheckBox x:Name="cb5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" IsChecked="{Binding CO2}">
+                <TextBlock Text="Датчик СО2" FontSize="12"/>
+            </CheckBox>
+            <StackPanel Visibility="{Binding ElementName=cb5,Path=IsChecked,Converter={StaticResource b2v}}">
+                <Label Content="Тип датчика СО2" />
+                <ComboBox x:Name="cb"  ItemsSource="{Binding CO2Type}" SelectedItem="{Binding SelectedType}" Margin="25,5"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

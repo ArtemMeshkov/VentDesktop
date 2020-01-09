@@ -1,0 +1,148 @@
+﻿<UserControl x:Class="BMC.View.Full"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BMC.View"
+             xmlns:vm ="clr-namespace:BMC.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="270" d:DesignWidth="1920" >
+    <UserControl.Resources>
+        <Style TargetType="Button" x:Key="simple">
+            <Setter Property="Content" Value="Настройка"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="0,55,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+                        <GradientStop Color="#FF48D1F9" Offset="0"/>
+                        <GradientStop Color="#FF5584EA" Offset="0.82"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBox" x:Key="combo">
+            <Setter Property="Margin" Value="0,35"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="MaxWidth" Value="100"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="check">
+            <!--<Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="5"/>-->
+        </Style>
+        <Style TargetType="Label" x:Key="def">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Margin" Value="0,0"/>
+            <Setter Property="Grid.Row" Value="0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="hardStack" TargetType="StackPanel">
+            <Setter Property="Margin" Value="35,0"/>
+        </Style>
+        <local:IndexToBoolConverter x:Key="intovc1"/>
+        <local:InvB2Vc x:Key="ib2v"/>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Style="{StaticResource hardStack}" Visibility="{Binding InvisibleForExhausted, Converter={StaticResource ib2v}}">
+                <Label  Style="{StaticResource def}"  Content="Нагреватель" />
+                <StackPanel  >
+
+                    <ComboBox x:Name="cbh" Style="{StaticResource combo}"  ItemsSource="{Binding Path =DaNetHeaterFull}" SelectedItem ="{Binding SelectedValueHeater}">
+                    </ComboBox>
+                </StackPanel>
+                <Button  Command="{Binding TransferData}"
+                                CommandParameter="{Binding Num[0]}"  IsEnabled="{Binding ElementName=cbh,Path=SelectedIndex,Converter={StaticResource intovc1}}"
+                Style="{StaticResource simple}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource hardStack}" Visibility="{Binding InvisibleForExhausted, Converter={StaticResource ib2v}}">
+                <Label Style="{StaticResource def}"  Content="Охладитель" />
+                <StackPanel >
+                    <ComboBox x:Name="cbc" Style="{StaticResource combo}"  ItemsSource="{Binding Path =DaNetCoolerFull}" SelectedItem ="{Binding SelectedValueCooler}">
+
+                    </ComboBox>
+                </StackPanel>
+                <Button Visibility="{Binding InvisibleForExhausted, Converter={StaticResource ib2v}}"  Command ="{Binding TransferData}"
+                CommandParameter="{Binding Num[1]}"  IsEnabled="{Binding ElementName=cbc,Path=SelectedIndex,Converter={StaticResource intovc1}}"
+                Style="{StaticResource simple}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource hardStack}" Visibility="{Binding InvisibleForExhausted, Converter={StaticResource ib2v}}">
+                <Label  Style="{StaticResource def}" Content="Увлажнитель" />
+                <StackPanel  >
+                    <ComboBox x:Name="cbhumid" Style="{StaticResource combo}"  ItemsSource="{Binding Path =DaNetHumidFull}" SelectedItem ="{Binding SelectedValueHumid}">
+                    </ComboBox>
+                </StackPanel>
+                <Button  Command ="{Binding TransferData}"
+                CommandParameter="{Binding Num[2]}" IsEnabled="{Binding ElementName=cbhumid,Path=SelectedIndex,Converter={StaticResource intovc1}}"
+                Style="{StaticResource simple}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource hardStack}"  Visibility="{Binding InvisibleForForcedAndExhausted, Converter={StaticResource ib2v}}">
+                <Label Style="{StaticResource def}"  Content="Рекуперация"/>
+                <StackPanel  >
+                    <ComboBox x:Name="cbrecup" Style="{StaticResource combo}"  ItemsSource="{Binding Path = DaNetHeatExchangeFull}" SelectedItem ="{Binding SelectedValueHeatExchange}">
+                    </ComboBox>
+                </StackPanel>
+                <Button   Command ="{Binding TransferData}"
+                CommandParameter="{Binding Num[3]}" IsEnabled="{Binding ElementName=cbrecup,Path=SelectedIndex,Converter={StaticResource intovc1}}"
+                Style="{StaticResource simple}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource hardStack}"  Visibility="{Binding InvisibleForForcedAndExhausted, Converter={StaticResource ib2v}}">
+                <Label Style="{StaticResource def}"  Content="Рециркуляция"  />
+                <StackPanel  >
+                    <ComboBox x:Name="cbrecirc" Style="{StaticResource combo}"  ItemsSource="{Binding Path =DaNetRecircFull}" SelectedItem ="{Binding SelectedValueRecirc}">
+                    </ComboBox>
+                </StackPanel>
+                <Button  Command ="{Binding TransferData}"
+                CommandParameter="{Binding Num[4]}" IsEnabled="{Binding ElementName=cbrecirc,Path=SelectedIndex,Converter={StaticResource intovc1}}"
+                Style="{StaticResource simple}"/>
+
+            </StackPanel>
+            <StackPanel Style="{StaticResource hardStack}">
+                <Label  Content="Заслонки" Style="{StaticResource def}"/>
+                <StackPanel >
+                    <ComboBox x:Name="cbg" Style="{StaticResource combo}"  ItemsSource="{Binding Path =DaNetGateFull}" SelectedItem ="{Binding SelectedValueGate}">
+                    </ComboBox>
+                </StackPanel>
+                <Button  Command ="{Binding TransferData}"
+                CommandParameter="{Binding Num[5]}"   IsEnabled="{Binding ElementName=cbg,Path=SelectedIndex,Converter={StaticResource intovc1}}"
+                Style="{StaticResource simple}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource hardStack}">
+                <Label  Content=" Фильтры" Style="{StaticResource def}"/>
+                <StackPanel >
+                    <ComboBox x:Name="cbf" Style="{StaticResource combo}"  ItemsSource="{Binding Path =DaNetFilterFull}" SelectedItem ="{Binding SelectedValueFilter}">
+                    </ComboBox>
+                </StackPanel>
+                <Button  Command ="{Binding TransferData}"
+               CommandParameter="{Binding Num[6]}"  IsEnabled="{Binding ElementName=cbf,Path=SelectedIndex,Converter={StaticResource intovc1}}"
+                Style="{StaticResource simple}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource hardStack}">
+                <Label Style="{StaticResource def}"  Content="Вентиляторы" />
+                <Button  Command ="{Binding TransferData}"
+                CommandParameter="{Binding Num[8]}" 
+                Margin="0,160,0,0"
+                Style="{StaticResource simple}"/>
+
+            </StackPanel>
+            <StackPanel Style="{StaticResource hardStack}">
+                <Label Content="Параметры" Style="{StaticResource def}"/>
+                <Button  Command ="{Binding TransferData}"
+                CommandParameter="{Binding Num[7]}" 
+                Margin="0,160,0,0"
+                Style="{StaticResource simple}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
+
+

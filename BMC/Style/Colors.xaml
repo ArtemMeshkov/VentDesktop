@@ -1,0 +1,66 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:BMC">
+
+    <!-- Not my colors -->
+    <Color x:Key="BackgroundLight">#efefef</Color>
+    <SolidColorBrush x:Key="BackgroundLightBrush" Color="{StaticResource BackgroundLight}" />
+
+    <Color x:Key="BackgroundVeryLight">#fafafa</Color>
+    <SolidColorBrush x:Key="BackgroundVeryLightBrush" Color="{StaticResource BackgroundVeryLight}" />
+
+    <Color x:Key="ForegroundMain">#686868</Color>
+    <SolidColorBrush x:Key="ForegroundMainBrush" Color="{StaticResource ForegroundMain}" />
+
+    <Color x:Key="ForegroundVeryDark">#000000</Color>
+    <SolidColorBrush x:Key="ForegroundVeryDarkBrush" Color="{StaticResource ForegroundVeryDark}" />
+
+    <Color x:Key="ForegroundLight">#ffffff</Color>
+    <SolidColorBrush x:Key="ForegroundLightBrush" Color="{StaticResource ForegroundLight}" />
+    
+    <!-- Sort of BLue -->
+
+    <Color x:Key="BlueDark">#2b5278</Color>
+    <SolidColorBrush x:Key="BlueDarkBrush" Color="{StaticResource BlueDark}" />
+
+    <Color x:Key="BlueDefault">#466c91</Color>
+    <SolidColorBrush x:Key="BlueDefaultBrush" Color="{StaticResource BlueDefault}" />
+
+    <Color x:Key="BlueLight">#678aac</Color>
+    <SolidColorBrush x:Key="BlueLightBrush" Color="{StaticResource BlueLight}" />
+
+    <!--  Sort of Purple -->
+
+    <Color x:Key="PurpleLight">#7d6fb3</Color>
+    <SolidColorBrush x:Key="PurpleLightBrush" Color="{StaticResource PurpleLight}" />
+
+    <Color x:Key="PurpleDefault">#5e4e9a</Color>
+    <SolidColorBrush x:Key="PurpleDefaultBrush" Color="{StaticResource PurpleDefault}" />
+
+    <Color x:Key="PurpleDark">#41307f</Color>
+    <SolidColorBrush x:Key="PurpleDarkBrush" Color="{StaticResource PurpleDark}" />
+
+    <!--  Sort of Green -->
+
+    <Color x:Key="GreenLight">#69b987</Color>
+    <SolidColorBrush x:Key="GreenLightBrush" Color="{StaticResource GreenLight}" />
+
+    <Color x:Key="GreenDefault">#47a269</Color>
+    <SolidColorBrush x:Key="GreenDefaultBrush" Color="{StaticResource GreenDefault}" />
+
+    <Color x:Key="GreenDark">#2c864d</Color>
+    <SolidColorBrush x:Key="GreenDarkBrush" Color="{StaticResource GreenDark}" />
+
+    <!--  Sort of Orange/brown -->
+
+    <Color x:Key="OrangeLight">#e7be83</Color>
+    <SolidColorBrush x:Key="OrangeLightBrush" Color="{StaticResource OrangeLight}" />
+
+    <Color x:Key="OrangeDefault">#dfac62</Color>
+    <SolidColorBrush x:Key="OrangeDefaultBrush" Color="{StaticResource OrangeDefault}" />
+
+    <Color x:Key="OrangeDark">#b8863d</Color>
+    <SolidColorBrush x:Key="OrangeDarkBrush" Color="{StaticResource OrangeDark}" />
+
+
+</ResourceDictionary>

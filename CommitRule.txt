@@ -1,0 +1,5 @@
+перешел на свою ветку 
+	git checkout artem
+сделал 	git add .
+сделал 	git commit -m "text of the commit"
+сделал 	git push origin artem

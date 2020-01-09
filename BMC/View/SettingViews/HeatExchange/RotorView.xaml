@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="BMC.View.RotorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BMC.View"
+             mc:Ignorable="d" 
+              d:DesignHeight="466" d:DesignWidth="240" >
+    <UserControl.Resources>
+      
+        <local:IndexToVisibilityConverter1 x:Key="incV1"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Питание рекуператора, В" VerticalAlignment="Center" Margin="5,10,5,0" />
+            <ComboBox  ItemsSource="{Binding  RotorPower}" SelectedItem="{Binding SelectedRotorPower}" MinWidth="70" Margin="0,10,10,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <Label  Margin="10" >
+                <Label.Content>
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center"> Мощность двигателя</TextBlock>
+                </Label.Content>
+            </Label>
+            <Slider Name="mySlider" Margin="10,15,15,10" Maximum="2.2" IsSnapToTickEnabled="True" Value="{Binding SelectedValue}" Ticks="{Binding PowerStages220,Mode=TwoWay}">
+            </Slider>
+            <WrapPanel Margin="10,5">
+                <Label Content="Мощность двигателя,кВт" />
+                <Label Margin="10,0,0,0" FontSize="14" Content="{Binding Path = Value,ElementName=mySlider}"/>
+            </WrapPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <Label Content="Регулирование скорости вращения" />
+            <ComboBox x:Name ="cb1"  ItemsSource="{Binding SpeedRegulator}" SelectedItem="{Binding SelectedSpeedRegulator}" MinWidth="70" Margin="5,10,10,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Visibility="{Binding ElementName=cb1, Path=SelectedIndex,Converter={StaticResource incV1}}">
+            <Label >
+                <Label.Content>
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Left">Управление частотным преобразователем</TextBlock>
+                </Label.Content>
+            </Label>
+            <ComboBox  ItemsSource="{Binding Signal}" SelectedItem="{Binding SelectedSignal}" MinWidth="40" Margin="15,10,80,15"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

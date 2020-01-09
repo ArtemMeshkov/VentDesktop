@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="BMC.View.ElectricView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:BMC.ViewModel"
+             xmlns:local="clr-namespace:BMC"
+             mc:Ignorable="d" 
+             d:DesignHeight="648" d:DesignWidth="240" >
+    <UserControl.Resources>
+        
+        
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="1.4*"/>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="0.7*"/>
+        </Grid.RowDefinitions>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">
+            <Label.Content>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">Настройка электрокалорифера</TextBlock>
+            </Label.Content>
+        </Label>
+        <WrapPanel Grid.Row="1" Margin="10,15">
+            <Label FontSize="14" Content="Количество ступеней" Margin="0,0,20,0"/>
+            <ComboBox  SelectedItem ="{Binding SelectedNumOfStages}" ItemsSource="{Binding NumOfStagesBD}" MinWidth="80" Margin="0,5,0,0">
+            </ComboBox>
+        </WrapPanel>
+        <WrapPanel Grid.Row="4" Margin="10">
+            <Label FontSize="14" Content="Количество термовыключателей" Margin="0,0,10,0"/>
+            <ComboBox  SelectedItem ="{Binding SelectedThermoSwitch}" ItemsSource="{Binding ThermoSwitchBD}" MinWidth="70
+                      " Margin="0,5,0,0">
+            </ComboBox>
+        </WrapPanel>
+        <CheckBox Grid.Row="3" IsChecked="{Binding PCHChecked}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5"  >
+            <TextBlock Text="Плавный пуск первой ступени" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14"/>
+        </CheckBox>
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <Label  Margin="10" FontSize="14">
+                <Label.Content>
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center">Максимальная мощность ступени</TextBlock>
+                </Label.Content>
+            </Label>
+            <Slider x:Name="mySlider" Value="{Binding SelectedValue}" Margin="10,40,15,10" Maximum="41" IsSnapToTickEnabled="True" Ticks="{Binding mass,Mode=TwoWay}">
+            </Slider>
+            <WrapPanel Margin="10,5">
+                <Label Content="Мощность ступени, кВт" FontSize="14"/>
+                <Label Margin="10,0,0,0" FontSize="14" Content="{Binding Path = Value,ElementName=mySlider, Mode=TwoWay}"/>
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

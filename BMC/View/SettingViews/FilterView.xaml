@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="BMC.View.FilterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BMC.View"
+             mc:Ignorable="d" 
+              d:DesignHeight="810" d:DesignWidth="240" >
+    <UserControl.Resources>
+       
+        <BooleanToVisibilityConverter x:Key="b2v"/>
+        <local:InvB2Vc x:Key="ib2v"/>
+    </UserControl.Resources>
+    <Grid Visibility="{Binding VisibleGrid, Converter={StaticResource b2v}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Фильтры" HorizontalAlignment="Center" Margin="0,15" FontSize="18" FontWeight="Bold"/>
+        <StackPanel Grid.Row="1" Margin="5,0" >
+            <StackPanel Visibility="{Binding ElementName=Exhausted,Path=IsChecked,Converter={StaticResource ib2v}}">
+                <Label Content="Приточный воздушный фильтр" FontSize="14" />
+                <CheckBox Content="Выбрать" x:Name="cb1" Margin="5,5" IsChecked="{Binding IsForcedSelected}"/>
+                <StackPanel Margin="5,10">
+                    <Label Content="Количество приточных фильтров" Margin="0,0,10,0" FontSize="14" Visibility="{Binding Path=IsChecked, ElementName=cb1, Converter={StaticResource b2v}}" />
+                    <ComboBox  ItemsSource="{Binding FNumber}" SelectedItem="{Binding SelectedFNumber}" MinWidth="70" Visibility="{Binding Path=IsChecked, ElementName=cb1, Converter={StaticResource b2v}}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Visibility="{Binding ElementName=Forced,Path=IsChecked,Converter={StaticResource ib2v}}">
+
+                <Label Content="Вытяжной воздушный фильтр" FontSize="14" />
+                <CheckBox Content="Выбрать" x:Name="cb2" Margin="5,5" IsChecked="{Binding IsExhaustedSelected}"/>
+                <StackPanel Margin="5,10">
+                    <Label Content="Количество вытяжных фильтров" Margin="0,0,10,0" FontSize="14" Visibility="{Binding Path=IsChecked, ElementName=cb2, Converter={StaticResource b2v}}" />
+                    <ComboBox  ItemsSource="{Binding ExhNumber}" SelectedItem="{Binding SelectedExhNumber}" MinWidth="70" Visibility="{Binding Path=IsChecked, ElementName=cb2, Converter={StaticResource b2v}}"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
+
