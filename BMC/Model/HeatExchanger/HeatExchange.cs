@@ -9,15 +9,21 @@ namespace BMC.Model
 {
     public class HeatExchange:Pins
     {
+        #region Properties
+
         public string Type { get; set; }
         public string TempSensor { get; set; }
         public string PressureSensor { get; set; }
 
+        #endregion
+
+        #region Get Methods
         public static List<string> GetTypes()
         {
             var result = new List<string> { "Роторный", "Пластинчатый", "Пластинчатый с рекуператором", "Гликолевый" };
             return result;
         }
+
         /// <summary>
         /// List[0]-AO,List[1]-DO,List[2]-AI,List[3]-DI
         /// </summary>
@@ -93,6 +99,10 @@ namespace BMC.Model
             return null;
         }
 
+        #endregion
+
+        #region Database
+
         private List<PowerObject> GetPCH(DataClass p)
         {
             //считать с бд выбор пч 
@@ -104,5 +114,7 @@ namespace BMC.Model
             //считать с бд автоматы и контакты
             return null;
         }
+
+        #endregion
     }
 }

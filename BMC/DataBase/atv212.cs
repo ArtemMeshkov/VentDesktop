@@ -7,19 +7,19 @@ namespace BMC
     public partial class ATV212
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public int Id { get; set; }
         
-        public double pumppower { get; set; }
+        public double PumpPower { get; set; }
         [StringLength(20)]
-        public string pch { get; set; }
+        public string Ach { get; set; }
 
         [StringLength(20)]
-        public string auto { get; set; }
+        public string Auto { get; set; }
         
         [StringLength(20)]
-        public string contactor { get; set; }
+        public string Contactor { get; set; }
 
-        public double elecpower { get; set; }
+        public double Elecpower { get; set; }
 
        
 

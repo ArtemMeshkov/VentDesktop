@@ -12,11 +12,16 @@ namespace BMC.Model
 {
     public class VentSettings : Pins
     {
-        public int VentPower { get; set; }
-        public DoubleCollection DrivePower { get; set; }
-        public string PCH { get; set; }
-        public string PCHType { get; set; }
+        #region Properties
 
+        //private int VentPower { get; set; }
+        //private DoubleCollection DrivePower { get; set; }
+        //private string PCH { get; set; }
+        //private string PCHType { get; set; }
+
+        #endregion
+
+        #region Get methods
         public static List<int> GetVentPower()
         {
             List<int> result = new List<int> { 380, 220 };
@@ -63,7 +68,7 @@ namespace BMC.Model
                         eDI += 1;
                     }
 
-                    else if (result.StringData[7] == "MODBUS RTU") { }//                    eDI -= 1;
+                    else if (result.StringData[7] == "MODBUS RTU") { }//  eDI -= 1;
                 }
                 if (result.StringData[3] == "Да")
                 {
@@ -94,8 +99,6 @@ namespace BMC.Model
                         fDI += 1;
                     }
                     else if (result.StringData[4] == "MODBUS RTU") { }
-                    // fDI -= 1;
-
                 }
                 if (result.StringData[3] == "Да")
                 {
@@ -103,8 +106,6 @@ namespace BMC.Model
                     fDO *= 2;
                 }
                 DO += fDO;
-                // DO += eDO;
-                // DI += eDI;
                 DI += fDI;
             }
             else if (result.StringData[0] == "Нет" && result.StringData[1] == "Да")
@@ -126,17 +127,13 @@ namespace BMC.Model
                     eDI *= 2;
                     eDO *= 2;
                 }
-                //DO += fDO;
                 DO += eDO;
                 DI += eDI;
-                // DI += fDI;
             }
             else { }
             List<int> newResult = new List<int> { AO, DO, AI, DI };
             return newResult;
-
         }
-
 
         public List<PowerObject> GetPowerParts(VentSettingViewModel p)
         {
@@ -195,8 +192,9 @@ namespace BMC.Model
             return PowerResult;
            // return PowerResult;
         }
+        #endregion
 
-        #region DataBase
+        #region DataBase methods
         /// <summary>
         /// ЭТО ТЕСТОВЫЙ ВАРИАНТ
         /// </summary>

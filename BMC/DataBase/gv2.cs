@@ -7,18 +7,18 @@ namespace BMC
     public partial class GV2
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [StringLength(20)]
-        public string contactor { get; set; }
+        public string Contactor { get; set; }
 
         [StringLength(20)]
-        public string auto { get; set; }
+        public string Auto { get; set; }
 
-        public double lowcurrent { get; set; }
+        public double Lowcurrent { get; set; }
 
-        public double highcurrent { get; set; }
+        public double Highcurrent { get; set; }
 
-        public double power { get; set; }
+        public double Power { get; set; }
     }
 }

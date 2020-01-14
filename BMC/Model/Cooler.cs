@@ -5,33 +5,30 @@ namespace BMC.Model
 {
     public class Cooler:Pins
     {
+        #region Properties
+
         public string Dryer { get; set; }
         public string ExtraHeater { get; set; }
         public string Type { get; set; }
         public int NumOfStages{get;set;}
         public int PumpPower { get; set; }
+
+        #endregion
+
+        #region Get Methods
         public static List<string> GetTypes()
         {
-            var result = new List<string>();
-            result.Add("Водяной");
-            result.Add("Фреоновый");
+            var result = new List<string> { "Водяной", "Фреоновый" };
             return result;
-
         }
         public static List<int> GetNumOfStages()
         {
-            var result = new List<int>();
-            result.Add(1);
-            result.Add(2);
-            result.Add(3);
-            result.Add(4);
+            var result = new List<int> { 1, 2, 3, 4 };
             return result;
         }
         public static List<int> GetPumpPower()
         {
-            var result = new List<int>();
-            result.Add(24);
-            result.Add(220);
+            var result = new List<int> { 24, 220 };
             return result;
         }
         /// <summary>
@@ -47,7 +44,6 @@ namespace BMC.Model
             DataClass CoolerControlResult = p.GetControlData();
             Type = CoolerControlResult.StringData[0];
             Dryer = CoolerControlResult.StringData[1];
-           
             if (Type == "Фреоновый")
             {
                 AI += 1;                //Room temperature
@@ -109,7 +105,6 @@ namespace BMC.Model
                     if (CoolerControlResult.StringData[0] == "Да")
                     { //что-то для термостата?
                     }
-
                 }
                 else
                 {
@@ -127,7 +122,6 @@ namespace BMC.Model
                         if (CoolerControlResult.StringData[4] == "Да")
                         { //что-то для термостата?
                         }
-
                     }
                     else
                     {
@@ -141,6 +135,10 @@ namespace BMC.Model
 
                 return null;
         }
+
+        #endregion
+
+        #region Database    
 
         private List<PowerObject> GetAuto(DataClass p)
         {
@@ -157,5 +155,6 @@ namespace BMC.Model
             //снять пч+автоматы с бд(atv)?
             return null;
         }
+        #endregion
     }
 }

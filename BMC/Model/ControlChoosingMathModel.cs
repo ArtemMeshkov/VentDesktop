@@ -8,138 +8,138 @@ namespace BMC.Model
 {
     class ControlChoosingMathModel
     {
-        #region Property
-        public int Dif { get; set; }
-        public int Extra { get; set; }
+        #region Properties
 
-        public int DI16 { get; set; }
-        public int UI16 { get; set; }
-        public int AO8 { get; set; }
-        public int DO12 { get; set; }
+        private int Dif { get; set; }
+        private int Extra { get; set; }
+        private int DI16 { get; set; }
+        private int UI16 { get; set; }
+        private int AO8 { get; set; }
+        private int DO12 { get; set; }
+        private int AO { get; set; }
+        private int DO { get; set; }
+        private int AI { get; set; }
+        private int DI { get; set; }
+        private int UI { get; set; }
+        private int U1 { get; set; }
+        private int U2 { get; set; }
+        private int AItest { get; set; }
+        private int DItest { get; set; }
+        private int Extra2 { get; set; }
 
-        public int AO { get; set; }
-        public int DO { get; set; }
-        public int AI { get; set; }
-        public int DI { get; set; }
-        public int UI { get; set; }
-
-        public int u1 { get; set; }
-        public int u2 { get; set; }
-        public int AItest { get; set; }
-        public int DItest { get; set; }
-        public int Spike { get; set; }
-        public int Power { get; set; }
         #endregion
+
         #region Methods
-        public static void Schet4(int Vvod, out int result)
+
+        public static void Count4(int input, out int result)
         {
-            if (Vvod <= 0)
+            if (input <= 0)
                 result = 0;
-            else if (Vvod % 4 == 0)
+            else if (input % 4 == 0)
             {
-                result = Vvod / 4;
+                result = input / 4;
             }
             else
             {
-                result = Vvod / 4 + 1;
+                result = input / 4 + 1;
             }
         }
-        public static void Schet8(int Vvod, out int result)
+        public static void Count8(int input, out int result)
         {
 
-            if (Vvod <= 0)
+            if (input <= 0)
                 result = 0;
-            else if (Vvod % 8 == 0)
+            else if (input % 8 == 0)
             {
-                result = Vvod / 8;
+                result = input / 8;
             }
             else
             {
-                result = Vvod / 8 + 1;
-            }
-
-        }
-        public static void Schet2(int Vvod, out int result)
-        {
-
-            if (Vvod <= 0)
-                result = 0;
-            else if (Vvod % 2 == 0)
-            {
-                result = Vvod / 2;
-            }
-            else
-            {
-                result = Vvod / 2 + 1;
+                result = input / 8 + 1;
             }
 
         }
-        public static void Schet16(int Vvod, out int result)
+        public static void Count2(int input, out int result)
         {
 
-            if (Vvod <= 0)
+            if (input <= 0)
                 result = 0;
-            else if (Vvod % 16 == 0)
+            else if (input % 2 == 0)
             {
-                result = Vvod / 16;
+                result = input / 2;
             }
             else
             {
-                result = Vvod / 16 + 1;
+                result = input / 2 + 1;
+            }
+
+        }
+        public static void Count16(int input, out int result)
+        {
+
+            if (input <= 0)
+                result = 0;
+            else if (input % 16 == 0)
+            {
+                result = input / 16;
+            }
+            else
+            {
+                result = input / 16 + 1;
             }
         }
-        public static void Schet12(int Vvod, out int result)
+        public static void Count12(int input, out int result)
         {
 
-            if (Vvod <= 0)
+            if (input <= 0)
                 result = 0;
-            else if (Vvod % 12 == 0)
+            else if (input % 12 == 0)
             {
-                result = Vvod / 12;
+                result = input / 12;
             }
             else
             {
-                result = Vvod / 12 + 1;
+                result = input / 12 + 1;
             }
         }
         #endregion
 
         public List<string> GetMathModel(int DI,int DO,int AI,int AO)
         {
-            List<string> resultstring = new List<string>();
+            List<string> resultString = new List<string>();
             ControlChoosingMathModel p = this;
             p.DI = DI;
             p.DO = DO;
             p.AI = AI;
             p.AO = AO;
-            Schet8(p.DI, out int lul);
-            p.DItest = lul * 8;
-            Schet8(p.AI, out int lul2);
-            p.AItest = lul2 * 8;
-            Schet4(p.AO, out int u2);
-            p.u2 = u2;
-            Schet4(p.DO, out int u1);
-            p.u1 = u1;
+            Count8(p.DI, out int param1);
+            p.DItest = param1 * 8;
+            Count8(p.AI, out int param2);
+            p.AItest = param2 * 8;
+            Count4(p.AO, out int u2);
+            p.U2 = u2;
+            Count4(p.DO, out int u1);
+            p.U1 = u1;
             ReMath:
-            p.UI = p.u1 * 8 + p.u2 * 8;
+            p.UI = p.U1 * 8 + p.U2 * 8;
 
             if ((p.UI <= p.AI) && (p.AI != 0))
             {
                 int c = p.AI - p.UI;
                 if (c > 8)
                 {
-                    Schet16(c, out int UI16);
+                    Count16(c, out int UI16);
                     p.UI16 = UI16;
                 }
                 else if ((0 <= c) && (c <= 8))
                 {
-                    Schet8(c, out int mem);
-                    p.u1 = mem;
+                    Count8(c, out int param3);
+                    p.U1 = param3;
                 }
 
-                int DIOst = p.DI - (p.UI16 * 16 + p.u1 * 8 - c);
+                int DIOst = p.DI - (p.UI16 * 16 + p.U1 * 8 - c);
 
-                Schet16(DIOst, out int DI16);
+                Count16(DIOst, out int DI16);
                 p.DI16 = DI16;
             }
             else
@@ -149,7 +149,7 @@ namespace BMC.Model
                 if (p.Dif <= p.DItest)
                 {
                     int d = p.DI - p.Dif;
-                    Schet16(d, out int DI16);
+                    Count16(d, out int DI16);
                     p.DI16 = DI16;
 
                 }
@@ -158,61 +158,59 @@ namespace BMC.Model
                     int d = p.AI - p.Dif;
                     if (d > 8)
                     {
-                        Schet16(d, out int AI16);
+                        Count16(d, out int AI16);
                         p.UI16 = AI16;
                     }
                     else if ((0 <= d) && (d <= 8))
                     {
-                        Schet8(d, out int mem);
-                        p.u1 = mem;
+                        Count8(d, out int param4);
+                        p.U1 = param4;
                     }
                 }
                 else
                 {
                     int pls = p.Dif - p.DI;
-                    Schet2(pls, out int Extra);
+                    Count2(pls, out int Extra);
                     p.Extra = Extra;
                     if (p.Extra <= p.AO)
                     {
-                        Schet8(p.Extra, out int u3);
+                        Count8(p.Extra, out int u3);
                         p.AO8 = u3;
                         int dif = p.AO - p.AO8 * 8;
-                        Schet4(dif, out int xd);
-                        p.u2 = xd;
+                        Count4(dif, out int param5);
+                        p.U2 = param5;
                         goto ReMath;
                     }
 
                     else if (p.Extra - p.AO <= p.DO)
                     {
                         int k = p.DO / 12;
-                        Schet4(k, out int d);
-                        p.u1 = d;
-                        Schet12(p.DO - d * 4, out int a);   /*если что-то сломалось, тут предется думать о занулении ДО*/
+                        Count4(k, out int d);
+                        p.U1 = d;
+                        Count12(p.DO - d * 4, out int a);   /*если что-то сломалось, тут предется думать о занулении DO*/
                         p.DO12 = a;
-
-
                         goto ReMath;
                     }
-                    else if (p.Spike == 1)
+                    else if (p.Extra2 == 1)
                     {
-                        p.u1 = 0;
-                        int ost = p.DO / 4;
-                        if (ost != 0)
+                        p.U1 = 0;
+                        int left = p.DO / 4;
+                        if (left != 0)
                         {
-                            p.u1 = 1;
+                            p.U1 = 1;
                         }
-                        Schet12(p.DO - ost, out int u3);
+                        Count12(p.DO - left, out int u3);
                         p.DO12 = u3;
                         goto ReMath;
                     }
                     else
                     {
-                        p.u2 = 0;
-                        Schet8(p.AO, out int lamao);
-                        p.AO8 = lamao;
+                        p.U2 = 0;
+                        Count8(p.AO, out int param6);
+                        p.AO8 = param6;
                         p.AO = 0;
-                        p.UI = p.u1 * 8;
-                        p.Spike++;
+                        p.UI = p.U1 * 8;
+                        p.Extra2++;
 
                         goto ReMath;
                     }
@@ -220,20 +218,20 @@ namespace BMC.Model
                 }
 
             }
-            resultstring.Add("Ваша конфигурация с заданными параметрами:\nСервер автоматизации AS-P");
-            if(p.u1!=0)
-                resultstring.Add($"UI8/DO4 {p.u1} штук");
-            if (p.u2 != 0)
-                resultstring.Add($"UI8/AO4 {p.u2} штук");
+            resultString.Add("Ваша конфигурация с заданными параметрами:\nСервер автоматизации AS-P");
+            if(p.U1!=0)
+                resultString.Add($"UI8/DO4 {p.U1} штук");
+            if (p.U2 != 0)
+                resultString.Add($"UI8/AO4 {p.U2} штук");
             if (p.DO12 != 0)
-                resultstring.Add($"DO12 {p.DO12} штук");
+                resultString.Add($"DO12 {p.DO12} штук");
             if (p.UI16 != 0)
-                resultstring.Add($"UI16 {p.UI16} штук ");
+                resultString.Add($"UI16 {p.UI16} штук ");
             if (p.AO8!=0)
-                resultstring.Add($"AO8 {p.AO8} штук");
+                resultString.Add($"AO8 {p.AO8} штук");
             if (p.DI16 != 0)
-                resultstring.Add($"DI16 {p.DI16} штук");
-            return resultstring;
+                resultString.Add($"DI16 {p.DI16} штук");
+            return resultString;
 
         }
 

@@ -5,10 +5,15 @@ namespace BMC.Model
 {
     public class Heater: Pins
     {
+        #region Properties
+
         public string Type { get ; set; }
         public string ExtraType { get; set; }
-        //private LiquidModel LiquidM { get; set; }
-        //private ElectricModel ElectricM { get; set; }
+
+        #endregion
+
+        #region Get Methods
+
         public static List<string> GetHeater()
         {
             List<string> result = new List<string>();
@@ -129,6 +134,9 @@ namespace BMC.Model
             return Result;
         }
 
+        #endregion
+
+        #region Database 
         private List<PowerObject> GetAuto(DataClass p)
         {
             //снять автоматы с бд 220/380
@@ -144,5 +152,6 @@ namespace BMC.Model
             //снять пч+автоматы с бд(atv)?
             return null;
         }
+        #endregion
     }
 }

@@ -8,11 +8,20 @@ namespace BMC.Model
 {
     class PlateWithBypass
     {
+        #region Properties
+
         public int Power{get;set;}
+
+        #endregion
+
+        #region Get Methods
+
         public static List<int> GetPower()
         {
             var result = new List<int> { 24, 220 };
             return result;
         }
+
+        #endregion
     }
 }
