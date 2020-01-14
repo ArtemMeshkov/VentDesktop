@@ -13,12 +13,12 @@ namespace BMC
 
             InitializeComponent();
             
-            DataContext = PageChangeVentTypes.GetInstance(this);
+            DataContext = MainWindowVM.GetInstance(this);
         }
 
         private void ResetClick(object sender, RoutedEventArgs e)
         {
-            DataContext = PageChangeVentTypes.ResetInstance(this);
+            DataContext = MainWindowVM.ResetInstance(this);
         }
 
         

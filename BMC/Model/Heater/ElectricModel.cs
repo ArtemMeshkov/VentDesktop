@@ -9,12 +9,10 @@ namespace BMC.Model
     public class ElectricModel
     {
         #region Properties
-
         public int NumOfStages { get;set; }
         public double PowerOfStage { get;  set; }
         public string FirstStage { get;  set; }
         public int ThermoSwitch { get; set; }
-
         #endregion
 
         #region Get Methods

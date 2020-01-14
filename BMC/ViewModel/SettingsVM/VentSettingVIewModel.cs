@@ -10,7 +10,12 @@ namespace BMC.ViewModel
 {
     public class VentSettingViewModel : BaseViewModel
     {
+        #region Private members
+
         private List<BaseViewModel> _pageViewModels;
+
+        #endregion
+
         #region Properties
         public VentViewModel ForcedVM { get; set; }
         public VentViewModel ExhaustedVM { get; set; }
@@ -34,8 +39,9 @@ namespace BMC.ViewModel
             get; set;
         }
 
-  
         #endregion
+
+        #region Constructor
         public VentSettingViewModel()
         {
             ForcedVM = new VentViewModel();
@@ -45,6 +51,9 @@ namespace BMC.ViewModel
             CurrentPageForcedViewModel = PageViewVentModels[0];
             CurrentPageExhaustedViewModel = PageViewVentModels[1];
         }
+        #endregion
+
+        #region Data methods
         /// <summary>
         /// StringData[0] - exhausted type, StringData[1] - forced type; after - vent properties
         /// </summary>
@@ -52,32 +61,32 @@ namespace BMC.ViewModel
         public override DataClass GetControlData()
         {
             DataClass result = new DataClass();
-            PageChangeVentTypes k = PageChangeVentTypes.GetInstance();
-            if (k.ExhaustedIsChecked){
+            MainWindowVM instance = MainWindowVM.GetInstance();
+            if (instance.ExhaustedIsChecked){
                 result.StringData.Add("Да");
                 result.StringData.Add("Нет");
-                DataClass forced = ExhaustedVM.GetControlData();
-                result.StringData.AddRange(forced.StringData);
-                result.IntData.AddRange(forced.IntData);
+                DataClass exhaustedControl = ExhaustedVM.GetControlData();
+                result.StringData.AddRange(exhaustedControl.StringData);
+                result.IntData.AddRange(exhaustedControl.IntData);
             }
-            else if (k.ForcedIsChecked)
+            else if (instance.ForcedIsChecked)
             {
                 result.StringData.Add("Нет");
                 result.StringData.Add("Да");
-                DataClass exhausted = ForcedVM.GetControlData();
-                result.StringData.AddRange(exhausted.StringData);
-                result.IntData.AddRange(exhausted.IntData);
+                DataClass forcedControl = ForcedVM.GetControlData();
+                result.StringData.AddRange(forcedControl.StringData);
+                result.IntData.AddRange(forcedControl.IntData);
             }
-            else if (k.FullIsChecked)
+            else if (instance.FullIsChecked)
             {
                 result.StringData.Add("Да");
                 result.StringData.Add("Да");
-                DataClass forced = ExhaustedVM.GetControlData();
-                result.StringData.AddRange(forced.StringData);
-                result.IntData.AddRange(forced.IntData);
-                DataClass exhausted = ForcedVM.GetControlData();
-                result.StringData.AddRange(exhausted.StringData);
-                result.IntData.AddRange(exhausted.IntData);
+                DataClass exhaustedControl = ExhaustedVM.GetControlData();
+                result.StringData.AddRange(exhaustedControl.StringData);
+                result.IntData.AddRange(exhaustedControl.IntData);
+                DataClass forcedControl = ForcedVM.GetControlData();
+                result.StringData.AddRange(forcedControl.StringData);
+                result.IntData.AddRange(forcedControl.IntData);
             }
             else
             {
@@ -96,33 +105,33 @@ namespace BMC.ViewModel
         public override DataClass GetPowerData()
         {
             DataClass result = new DataClass();
-            PageChangeVentTypes k = PageChangeVentTypes.GetInstance();
-            if (k.ExhaustedIsChecked)
+            MainWindowVM instance = MainWindowVM.GetInstance();
+            if (instance.ExhaustedIsChecked)
             {
                 result.StringData.Add("Да");
                 result.StringData.Add("Нет");
-                DataClass forced = ExhaustedVM.GetPowerData();
-                result.StringData.AddRange(forced.StringData);
-                result.IntData.AddRange(forced.IntData);
+                DataClass exhaustedPower = ExhaustedVM.GetPowerData();
+                result.StringData.AddRange(exhaustedPower.StringData);
+                result.IntData.AddRange(exhaustedPower.IntData);
             }
-            else if (k.ForcedIsChecked)
+            else if (instance.ForcedIsChecked)
             {
                 result.StringData.Add("Нет");
                 result.StringData.Add("Да");
-                DataClass exhausted = ForcedVM.GetControlData();
-                result.StringData.AddRange(exhausted.StringData);
-                result.IntData.AddRange(exhausted.IntData);
+                DataClass forcedPower = ForcedVM.GetPowerData();
+                result.StringData.AddRange(forcedPower.StringData);
+                result.IntData.AddRange(forcedPower.IntData);
             }
-            else if (k.FullIsChecked)
+            else if (instance.FullIsChecked)
             {
                 result.StringData.Add("Да");
                 result.StringData.Add("Да");
-                DataClass forced = ExhaustedVM.GetPowerData();
-                result.StringData.AddRange(forced.StringData);
-                result.IntData.AddRange(forced.IntData);
-                DataClass exhausted = ForcedVM.GetPowerData();
-                result.StringData.AddRange(exhausted.StringData);
-                result.IntData.AddRange(exhausted.IntData);
+                DataClass exhaustedPower = ExhaustedVM.GetPowerData();
+                result.StringData.AddRange(exhaustedPower.StringData);
+                result.IntData.AddRange(exhaustedPower.IntData);
+                DataClass forcedPower = ForcedVM.GetPowerData();
+                result.StringData.AddRange(forcedPower.StringData);
+                result.IntData.AddRange(forcedPower.IntData);
             }
             else
             {
@@ -131,5 +140,6 @@ namespace BMC.ViewModel
             }
             return result;
         }
+        #endregion
     }
 }

@@ -8,24 +8,28 @@ namespace BMC.Model
 {
     public class SettingModel : Pins
     {
+        #region Properties
         public bool? PhaseCheck { get; set; }
         public bool? OperatorPanel { get; set; }
         public bool? TempOut { get; set; }
         public bool? TempIn { get; set; }
         public bool? CO2 { get; set; }
         public string SelectedType { get; set; }
+        #endregion
+
+        #region Get Methods
         public static List<string> GetTypes()
         {
             List<string> result = new List<string> { "Комнатный", "Канальный" };
             return result;
         }
-        public List<int> GetPins(SettingViewModel p)
+        public List<int> GetPins(SettingViewModel settingVM)
         {
-            CO2 = p.CO2;
-            PhaseCheck = p.PhaseCheck;
-            TempOut = p.TempOut;
-            TempIn = p.TempIn;
-            OperatorPanel = p.OperatorPanel;
+            CO2 = settingVM.CO2;
+            PhaseCheck = settingVM.PhaseCheck;
+            TempOut = settingVM.TempOut;
+            TempIn = settingVM.TempIn;
+            OperatorPanel = settingVM.OperatorPanel;
             if (CO2 == true)
                 AI += 1;
             if (PhaseCheck == true)             //??????
@@ -38,7 +42,6 @@ namespace BMC.Model
                 DI += 1;
             List<int> result = new List<int> { AO, DO, AI, DI };
             return result;
-
         }
         public List<string> GetInfo()
         {
@@ -49,5 +52,6 @@ namespace BMC.Model
             }
             return result;
         }
+        #endregion
     }
 }

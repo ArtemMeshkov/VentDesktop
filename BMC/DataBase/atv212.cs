@@ -11,7 +11,7 @@ namespace BMC
         
         public double PumpPower { get; set; }
         [StringLength(20)]
-        public string Ach { get; set; }
+        public string PCH { get; set; }
 
         [StringLength(20)]
         public string Auto { get; set; }
@@ -19,7 +19,7 @@ namespace BMC
         [StringLength(20)]
         public string Contactor { get; set; }
 
-        public double Elecpower { get; set; }
+        public double ElecPower { get; set; }
 
        
 

@@ -10,7 +10,6 @@ namespace BMC.ViewModel
     {
         #region Private variables        
         private string _selectionItemChanged;
-        private ICommand _changePageCommand;
         private List<BaseViewModel> _pageViewModels;
         private string _selectionExtraItemChanged;
         private List<BaseViewModel> _pageViewExtraModels;
@@ -112,17 +111,15 @@ namespace BMC.ViewModel
             CurrentPageExtraHeaterViewModel = PageViewExtraHeaterModels
                 .FirstOrDefault(vm => vm == viewModel);
         }
-        public static void SetToNull(HeaterViewModel Current)
+        public static void SetToNull(HeaterViewModel current)
         {
-            Current.VisibleGrid = false;
+            current.VisibleGrid = false;
         }
-        public static void SetToStandart(HeaterViewModel Current)
+        public static void SetToStandart(HeaterViewModel current)
         {
-            Current.VisibleGrid = true;
-        }
+            current.VisibleGrid = true;
+        }     
         
-
-
         #endregion
 
         #region Contstructor
@@ -155,35 +152,35 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetControlData()
         {
-            DataClass HeaterResult = new DataClass();
-            HeaterResult.StringData.Add(SelectedValueHeaterVar);
+            DataClass heaterResult = new DataClass();
+            heaterResult.StringData.Add(SelectedValueHeaterVar);
             if (SelectedValueHeaterVar == HeaterList[1])
             {
-                DataClass ElectricControl = ElectricalVM.GetControlData();
-                HeaterResult.StringData.AddRange(ElectricControl.StringData);
-                HeaterResult.IntData.AddRange(ElectricControl.IntData);
+                DataClass electricControl = ElectricalVM.GetControlData();
+                heaterResult.StringData.AddRange(electricControl.StringData);
+                heaterResult.IntData.AddRange(electricControl.IntData);
             }
             else if (SelectedValueHeaterVar==HeaterList[0])
             {
-                DataClass LiquidControl = LiquidVM.GetControlData();
-                HeaterResult.StringData.AddRange(LiquidControl.StringData);
+                DataClass liquidControl = LiquidVM.GetControlData();
+                heaterResult.StringData.AddRange(liquidControl.StringData);
             }
             if (ExtraHeater == true)
             {
-                HeaterResult.StringData.Add(SelectedExtraHeater);
+                heaterResult.StringData.Add(SelectedExtraHeater);
                 if (SelectedExtraHeater == ExtraHeaterList[1])
                 {
-                    DataClass ElectricControl = ExtraElectrical.GetControlData();
-                    HeaterResult.StringData.AddRange(ElectricControl.StringData);
-                    HeaterResult.IntData.AddRange(ElectricControl.IntData);
+                    DataClass electricControl = ExtraElectrical.GetControlData();
+                    heaterResult.StringData.AddRange(electricControl.StringData);
+                    heaterResult.IntData.AddRange(electricControl.IntData);
                 }
                 else if (SelectedExtraHeater == ExtraHeaterList[0])
                 {
-                    DataClass LiquidControl = ExtraLiquid.GetControlData();
-                    HeaterResult.StringData.AddRange(LiquidControl.StringData);
+                    DataClass liquidControl = ExtraLiquid.GetControlData();
+                    heaterResult.StringData.AddRange(liquidControl.StringData);
                 }
             }
-            return HeaterResult;
+            return heaterResult;
         }
         /// <summary>
         /// Transfer of electrical/liquid properties, look into it
@@ -192,33 +189,33 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetPowerData()
         {
-            DataClass HeaterResult = new DataClass();
+            DataClass heaterResult = new DataClass();
             if (SelectedValueHeaterVar == HeaterList[1])
             {
-                DataClass ElectricPower = ElectricalVM.GetPowerData();
-                HeaterResult.StringData.AddRange(ElectricPower.StringData);
-                HeaterResult.IntData.AddRange(ElectricPower.IntData);
+                DataClass electricPower = ElectricalVM.GetPowerData();
+                heaterResult.StringData.AddRange(electricPower.StringData);
+                heaterResult.IntData.AddRange(electricPower.IntData);
             }
             else if (SelectedValueHeaterVar==HeaterList[0])
             {
-                DataClass LiquidControl = LiquidVM.GetPowerData();
-                HeaterResult.IntData.AddRange(LiquidControl.IntData);
+                DataClass liquidPower = LiquidVM.GetPowerData();
+                heaterResult.IntData.AddRange(liquidPower.IntData);
             }
             if (ExtraHeater == true)
             {
                 if (SelectedExtraHeater == ExtraHeaterList[1])
                 {
-                    DataClass ElectricPower = ExtraElectrical.GetPowerData();
-                    HeaterResult.StringData.AddRange(ElectricPower.StringData);
-                    HeaterResult.IntData.AddRange(ElectricPower.IntData);
+                    DataClass electricPower = ExtraElectrical.GetPowerData();
+                    heaterResult.StringData.AddRange(electricPower.StringData);
+                    heaterResult.IntData.AddRange(electricPower.IntData);
                 }
                 else if (SelectedExtraHeater == ExtraHeaterList[0])
                 {
-                    DataClass LiquidControl = ExtraLiquid.GetPowerData();
-                    HeaterResult.IntData.AddRange(LiquidControl.IntData);
+                    DataClass liquidPower = ExtraLiquid.GetPowerData();
+                    heaterResult.IntData.AddRange(liquidPower.IntData);
                 }
             }
-            return HeaterResult;
+            return heaterResult;
         }
         #endregion
     }

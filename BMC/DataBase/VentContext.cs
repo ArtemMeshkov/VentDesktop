@@ -3,9 +3,7 @@ namespace BMC
     using System.Data.Entity;
 
     public class VentContext : DbContext
-    {
-     
-
+    {     
         public VentContext()
           : base("VentProperties")
         {

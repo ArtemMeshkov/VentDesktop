@@ -10,8 +10,13 @@ namespace BMC.ViewModel
 {
     public class RotorViewModel: BaseViewModel
     {
-        #region Properties
+        #region Private members
+
         private int _selectedIntValue;
+
+        #endregion
+
+        #region Properties
         public List<int> RotorPower { get; set; }
         public DoubleCollection PowerStages220 { get; set; }
         public DoubleCollection PowerStages380 { get; set; }
@@ -40,7 +45,6 @@ namespace BMC.ViewModel
         {
             RotorPower = Rotor.GetPower();
             PowerStages220 = Rotor.GetPower220();
-            //PowerStages380 = Rotor.GetPower380();
             SpeedRegulator = Rotor.GetSpeedRegulator();
             Signal = Rotor.GetSignal();
             SelectedRotorPower = RotorPower[0];

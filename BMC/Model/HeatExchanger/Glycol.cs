@@ -9,11 +9,9 @@ namespace BMC.Model
     public class Glycol
     {
         #region Properties
-
         public int ValvePower { get; set; }
         public int DrivePower { get; set; }
         public string VentStatus { get; set; }
-
         #endregion
 
         #region Get Methods

@@ -8,12 +8,16 @@ namespace BMC.Model
 {
     public class HoneyCombsModel
     {
+        #region Properties
         public string WaterType { get; set; }
         public int NumOfStages { get; set; }
         public string ByPass { get; set; }
         public string InWater { get; set; }
         public string OutWater { get; set; }
         public string LevelCheck { get; set; }
+        #endregion
+
+        #region
         public static List<string> GetTypes()
         {
             var result = new List<string> { "Оборотная", "Прямая" };
@@ -22,13 +26,9 @@ namespace BMC.Model
         }
         public static List<int> GetNumOfStages()
         {
-            var result = new List<int>();
-            result.Add(1);
-            result.Add(2);
-            result.Add(3);
-            result.Add(4);
-            result.Add(5);
+            var result = new List<int> { 1, 2, 3, 4, 5 };
             return result;
         }
+        #endregion
     }
 }

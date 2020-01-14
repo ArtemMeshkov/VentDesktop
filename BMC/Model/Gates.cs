@@ -9,10 +9,14 @@ namespace BMC.Model
 {
     public class Gates:Pins
     {
+        #region Properties
         public int PowerExhausted { get; set; }
         public int PowerForced { get; set; }
         public string ForcedChosen { get; set; }
         public string ExhaustedChosen { get; set; }
+        #endregion
+
+        #region Get Methods
         public static List<int> GetPower()
         {
             var result = new List<int> { 24, 220 };
@@ -21,46 +25,47 @@ namespace BMC.Model
         /// <summary>
         /// List[0]=AO,List[1]=DO,List[2]=AI,List[3]=DI
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="gateVM"></param>
         /// <returns></returns>
-        public List<int> GetPins(GatesViewModel p)
+        public List<int> GetPins(GatesViewModel gateVM)
         {
-            DataClass GatesControlResult = p.GetControlData();
-            if (GatesControlResult.StringData[0] == "Да")
+            DataClass gateControlData = gateVM.GetControlData();
+            if (gateControlData.StringData[0] == "Да")
                 DO += 1;
-            if (GatesControlResult.StringData[1] == "Да")
+            if (gateControlData.StringData[1] == "Да")
                 DO += 1;
             List<int> result = new List<int> { AO, DO, AI, DI };
             return result;
         }
 
-        public List<PowerObject> GetPowerParts(GatesViewModel p)
+        public List<PowerObject> GetPowerParts(GatesViewModel gateVM)
         {
-            List<PowerObject> GatePower = new List<PowerObject>();
-            DataClass result = p.GetPowerData();
-            if (result.IntData[0] != 0) {
-                if (result.StringData[0] == "Двухпозиционное") { }
+            List<PowerObject> gatePower = new List<PowerObject>();
+            DataClass gatePowerData = gateVM.GetPowerData();
+            if (gatePowerData.IntData[0] != 0) {
+                if (gatePowerData.StringData[0] == "Двухпозиционное") { }
                 else
                 { }
-                if (result.StringData[1] == "Да")
+                if (gatePowerData.StringData[1] == "Да")
                 {
 
                 }
                 else { }
             }
-            if (result.IntData[1] != 0)
+            if (gatePowerData.IntData[1] != 0)
             {
-                if (result.StringData[0] == "Двухпозиционное") { }
+                if (gatePowerData.StringData[0] == "Двухпозиционное") { }
                 else
                 { }
-                if (result.StringData[1] == "Да")
+                if (gatePowerData.StringData[1] == "Да")
                 {
 
                 }
                 else { }
             }
 
-            return GatePower;
+            return gatePower;
         }
+        #endregion
     }
 }

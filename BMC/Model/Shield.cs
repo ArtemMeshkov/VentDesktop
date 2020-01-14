@@ -8,29 +8,35 @@ namespace BMC.Model
 {
     public class Shield:BaseViewModel
     {
-        public List<int> ControlList { get; set; }
-        public List<PowerObject> PowerList { get; set; }
+        #region Properties
+        private List<int> ControlList { get; set; }
+        private List<PowerObject> PowerList { get; set; }
         public string Name { get; set; }
         public int Number { get; set; } = 1;
+        #endregion
 
+        #region Constructor
         public Shield()
         {
             ControlList = new List<int>();
             PowerList = new List<PowerObject>();
         }
+        #endregion
 
+        #region Get Methods
         public List<int> GetControlInfo()
         {
-            Sbor ControlSbor = new Sbor();
-            ControlList = ControlSbor.GetAllControlData();
+            AllPartsData controlSbor = new AllPartsData();
+            ControlList = controlSbor.GetAllControlData();
             return ControlList;
         }
 
         public List<PowerObject> GetPowerInfo()
         {
-            Sbor PowerSbor = new Sbor();
-            PowerList = PowerSbor.GetAllPowerData();
+            AllPartsData powerSbor = new AllPartsData();
+            PowerList = powerSbor.GetAllPowerData();
             return PowerList;
         }
+        #endregion
     }
 }

@@ -7,10 +7,14 @@ namespace BMC.ViewModel
 {
     public class CoolerViewModel:BaseViewModel
     {
+        #region Private members
         private ICommand _changePageCommand;
         private List<BaseViewModel> _pageViewModels;
         private bool? _extraHeaterChecked;
-        #region Properties
+        #endregion
+
+        #region Properties/commands
+
         public List<int> NumOfStages { get; set; }
         public List<int> PumpPower { get; set; }
         public List<string> CoolerTypes { get; set; }
@@ -79,27 +83,7 @@ namespace BMC.ViewModel
 
         public bool VisibleGrid { get; set; }
         #endregion
-
-        #region Methods
-        public void ChangeViewModel(BaseViewModel viewModel)
-        {
-            if (!PageViewExtraHeaterModels.Contains(viewModel))
-                PageViewExtraHeaterModels.Add(viewModel);
-
-            CurrentExtraHeaterViewModel = PageViewExtraHeaterModels
-                .FirstOrDefault(vm => vm == viewModel);
-        }
-        public static void SetToNull(CoolerViewModel Current)
-        {
-            Current.VisibleGrid = false;
-        }
-        public static void SetToStandart(CoolerViewModel Current)
-        {
-            Current.VisibleGrid = true;
-        }
-
-        #endregion
-
+               
         #region Constructor
         public CoolerViewModel()
         {
@@ -114,6 +98,26 @@ namespace BMC.ViewModel
             SelectedPumpPower = PumpPower[0];
             ExtraHeaterChecked = false;
         }
+        #endregion
+
+        #region Methods
+        public void ChangeViewModel(BaseViewModel viewModel)
+        {
+            if (!PageViewExtraHeaterModels.Contains(viewModel))
+                PageViewExtraHeaterModels.Add(viewModel);
+
+            CurrentExtraHeaterViewModel = PageViewExtraHeaterModels
+                .FirstOrDefault(vm => vm == viewModel);
+        }
+        public static void SetToNull(CoolerViewModel current)
+        {
+            current.VisibleGrid = false;
+        }
+        public static void SetToStandart(CoolerViewModel current)
+        {
+            current.VisibleGrid = true;
+        }
+
         #endregion
 
         #region Data Methods
@@ -135,9 +139,9 @@ namespace BMC.ViewModel
                 result.IntData.Add(0);
             if (ExtraHeaterChecked == true)
             {
-                DataClass HeaterResult = ExtraHeater.GetControlData();
-                result.StringData.AddRange(HeaterResult.StringData);
-                result.IntData.AddRange(HeaterResult.IntData);
+                DataClass heaterControl = ExtraHeater.GetControlData();
+                result.StringData.AddRange(heaterControl.StringData);
+                result.IntData.AddRange(heaterControl.IntData);
             }
 
             return result;
@@ -157,9 +161,9 @@ namespace BMC.ViewModel
                 result.IntData.Add(SelectedNumOfStages);
             if (ExtraHeaterChecked == true)
             {
-                DataClass HeaterResult = ExtraHeater.GetPowerData();
-                result.StringData.AddRange(HeaterResult.StringData);
-                result.IntData.AddRange(HeaterResult.IntData);
+                DataClass heaterPower = ExtraHeater.GetPowerData();
+                result.StringData.AddRange(heaterPower.StringData);
+                result.IntData.AddRange(heaterPower.IntData);
             }
             return result;
         }

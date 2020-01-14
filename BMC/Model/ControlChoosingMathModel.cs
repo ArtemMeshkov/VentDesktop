@@ -9,7 +9,6 @@ namespace BMC.Model
     class ControlChoosingMathModel
     {
         #region Properties
-
         private int Dif { get; set; }
         private int Extra { get; set; }
         private int DI16 { get; set; }
@@ -26,11 +25,9 @@ namespace BMC.Model
         private int AItest { get; set; }
         private int DItest { get; set; }
         private int Extra2 { get; set; }
-
         #endregion
 
         #region Methods
-
         public static void Count4(int input, out int result)
         {
             if (input <= 0)
@@ -104,6 +101,7 @@ namespace BMC.Model
         }
         #endregion
 
+        #region Main math model
         public List<string> GetMathModel(int DI,int DO,int AI,int AO)
         {
             List<string> resultString = new List<string>();
@@ -234,7 +232,7 @@ namespace BMC.Model
             return resultString;
 
         }
-
+        #endregion
     }
 
 }

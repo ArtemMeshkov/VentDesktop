@@ -5,36 +5,25 @@ namespace BMC.ViewModel
 {
     public class RecircViewModel : BaseViewModel
     {
-        private bool _visibleGrid;
         #region Properties
+
         public bool? WithoutExh { get; set; }
         public bool? WithoutVent { get; set; }
         public List<int> Power { get; set; }
         public int SelectedPower { get; set; }
+        public bool VisibleGrid { get; set; }
+
         #endregion
 
         #region Metods
 
-        public bool VisibleGrid
+        public static void SetToNull(RecircViewModel current)
         {
-            get
-            {
-                return _visibleGrid;
-            }
-            set
-            {
-                _visibleGrid = value;
-            }
+            current.VisibleGrid = false;
         }
-
-
-        public static void SetToNull(RecircViewModel Current)
+        public static void SetToStandart(RecircViewModel current)
         {
-            Current.VisibleGrid = false;
-        }
-        public static void SetToStandart(RecircViewModel Current)
-        {
-            Current.VisibleGrid = true;
+            current.VisibleGrid = true;
         }
 
         #endregion

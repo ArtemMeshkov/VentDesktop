@@ -33,7 +33,6 @@ namespace BMC.ViewModel
         #endregion
 
         #region Data Methods
-        #endregion
         /// <summary>
         /// StringData[0] - relay control, StringData[1]- operator panel check, StringData[2] - sensor of outter temp, StringData[3] - sensor of input temp,
         /// StringData[4] - CO2 sensor, StringData[5] - type of CO2,"Нет" if not chosen
@@ -58,5 +57,7 @@ namespace BMC.ViewModel
         {
             return base.GetPowerData();
         }
+
+        #endregion
     }
 }

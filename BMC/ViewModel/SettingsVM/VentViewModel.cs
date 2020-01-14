@@ -61,8 +61,7 @@ namespace BMC.ViewModel
             result.StringData.Add(SelectedDrivePower.ToString());
             result.StringData.Add(BoolToStringConverter.BTS((bool)PCHChecked));
             result.StringData.Add(BoolToStringConverter.BTS((bool)ReserveChecked));
-            result.StringData.Add(SelectedType);
-           
+            result.StringData.Add(SelectedType);           
             return result;
         }
         #endregion

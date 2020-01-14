@@ -8,9 +8,9 @@ namespace BMC.ViewModel
 {
     class BoolToStringConverter
     {
-        public static string BTS(bool b)
+        public static string BTS(bool value)
         {
-            if (b == true)
+            if (value == true)
                 return "Да";
             else
                 return "Нет";

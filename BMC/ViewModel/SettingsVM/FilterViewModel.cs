@@ -4,41 +4,29 @@ using System.Collections.Generic;
 
 namespace BMC.ViewModel
 {
-    public class FilterViewModel : BaseViewModel,ICommonData
+    public class FilterViewModel : BaseViewModel
     {
-        private bool _visibleGrid;
         #region Properties
+
         public List<int> FNumber { get; set; }
         public List<int> ExhNumber { get; set; }
         public bool? IsForcedSelected { get; set; }
         public bool? IsExhaustedSelected { get; set; }
         public int SelectedFNumber { get; set; }
         public int SelectedExhNumber { get; set; }
-        public bool VisibleGrid
-        {
-            get
-            {
-                return _visibleGrid;
-            }
-            set
-            {
-                _visibleGrid = value;
-            }
-        }
+        public bool VisibleGrid { get; set; }
+
         #endregion
 
         #region Metods
-
-
-
-
-        public static void SetToNull(FilterViewModel Current)
+                       
+        public static void SetToNull(FilterViewModel current)
         {
-            Current.VisibleGrid = false;
+            current.VisibleGrid = false;
         }
-        public static void SetToStandart(FilterViewModel Current)
+        public static void SetToStandart(FilterViewModel current)
         {
-            Current.VisibleGrid = true;
+            current.VisibleGrid = true;
         }
 
         #endregion

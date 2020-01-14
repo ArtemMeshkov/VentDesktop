@@ -7,10 +7,15 @@ namespace BMC.ViewModel
 {
     public class ElectricalViewModel : BaseViewModel
     {
-        #region Properties
-        private int _selectedIntvalue;
+        #region Private members
 
-        public DoubleCollection mass { get; set; }
+        private int _selectedIntValue;
+
+        #endregion
+
+        #region Properties
+
+        public DoubleCollection Arr { get; set; }
         public double SelectedValue
         { get; set; }
         public int SelectedNumOfStages { get; set; }
@@ -25,29 +30,26 @@ namespace BMC.ViewModel
         {
             get
             {
-                _selectedIntvalue = Convert.ToInt32(SelectedValue);
-                return _selectedIntvalue;
+                _selectedIntValue = Convert.ToInt32(SelectedValue);
+                return _selectedIntValue;
             }
             set
             {
-                _selectedIntvalue = value;
+                _selectedIntValue = value;
             }
         }
-        public static int Test1
-        {get;set;}
         #endregion
 
         #region Constructor
         public ElectricalViewModel()
         {
             NumOfStagesBD = ElectricModel.GetNumOfStages();
-            mass = ElectricModel.GetPowerOfStages();
+            Arr = ElectricModel.GetPowerOfStages();
             ThermoSwitchBD = ElectricModel.GetThermoSwitches();
             PCHChecked = false;
             SelectedNumOfStages = NumOfStagesBD[0];
             SelectedThermoSwitch = ThermoSwitchBD[0];
             SelectedValue = 0;
-
         }
         #endregion
 

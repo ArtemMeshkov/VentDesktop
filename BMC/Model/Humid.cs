@@ -5,44 +5,47 @@ namespace BMC.Model
 {
     public class Humid:Pins
     {
+        #region Properties
         public string Type { get; set; }
+        #endregion
+
+        #region GetMethods
         public static List<string> GetTypes()
         {
-            var result = new List<string>();
-            result.Add("Паровой");
-            result.Add("Сотовый");
+            var result = new List<string> { "Паровой", "Сотовый" };
             return result;
 
         }
+
         /// <summary>
         /// List[0]=AO,List[1]=DO,List[2]=AI,List[3]=DI
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="humidVM"></param>
         /// <returns></returns>
-        public List<int> GetPins(HumidViewModel p)
+        public List<int> GetPins(HumidViewModel humidVM)
         {
-            HoneyCombsModel HoneyCombsM = new HoneyCombsModel();
-            DataClass HumidControlResult = p.GetControlData();
-            Type = HumidControlResult.StringData[0];
+            HoneyCombsModel honeyCombsM = new HoneyCombsModel();
+            DataClass humidControlData = humidVM.GetControlData();
+            Type = humidControlData.StringData[0];
             AI += 2;   //humid sensors
             if(Type=="Сотовый")
             {
                 DO += 1;
-                HoneyCombsM.WaterType = HumidControlResult.StringData[1];
-                HoneyCombsM.ByPass = HumidControlResult.StringData[2];
-                HoneyCombsM.NumOfStages = HumidControlResult.IntData[0];
-                if (HoneyCombsM.ByPass == "Да") AO += 1;
-                if (HoneyCombsM.WaterType == "Оборотная")
+                honeyCombsM.WaterType = humidControlData.StringData[1];
+                honeyCombsM.ByPass = humidControlData.StringData[2];
+                honeyCombsM.NumOfStages = humidControlData.IntData[0];
+                if (honeyCombsM.ByPass == "Да") AO += 1;
+                if (honeyCombsM.WaterType == "Оборотная")
                 {
-                    HoneyCombsM.InWater = HumidControlResult.StringData[3];
-                    HoneyCombsM.OutWater = HumidControlResult.StringData[4];
-                    HoneyCombsM.LevelCheck = HumidControlResult.StringData[5];
-                    if (HoneyCombsM.InWater == "Да") DO += 1;
-                    if (HoneyCombsM.OutWater == "Да") DO += 1;
-                    if (HoneyCombsM.LevelCheck == "Да") DI += 2;
-                    DO += (HoneyCombsM.NumOfStages-1);
+                    honeyCombsM.InWater = humidControlData.StringData[3];
+                    honeyCombsM.OutWater = humidControlData.StringData[4];
+                    honeyCombsM.LevelCheck = humidControlData.StringData[5];
+                    if (honeyCombsM.InWater == "Да") DO += 1;
+                    if (honeyCombsM.OutWater == "Да") DO += 1;
+                    if (honeyCombsM.LevelCheck == "Да") DI += 2;
+                    DO += (honeyCombsM.NumOfStages-1);
                 }
-                else DO += HoneyCombsM.NumOfStages;
+                else DO += honeyCombsM.NumOfStages;
             }
             else
             {
@@ -52,14 +55,14 @@ namespace BMC.Model
             List<int> result = new List<int> { AO, DO, AI, DI };
             return result;
         }
-
-
-        public List<PowerObject> GetPowerParts(HumidViewModel p)
+        
+        public List<PowerObject> GetPowerParts(HumidViewModel humidVM)
         {
-            DataClass result = p.GetPowerData();
-            List<PowerObject> HumidResult = new List<PowerObject>();
+            DataClass humidPowerData = humidVM.GetPowerData();
+            List<PowerObject> humidPower = new List<PowerObject>();
             //метод управления или выбора автомата/трансформатора для клапана?
-            return HumidResult;
+            return humidPower;
         }
+        #endregion
     }
 }

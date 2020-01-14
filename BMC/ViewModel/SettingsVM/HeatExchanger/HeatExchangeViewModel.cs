@@ -10,7 +10,6 @@ namespace BMC.ViewModel
         #region Private variables
         private List<BaseViewModel> _pageViewModels;
         private string _selectionItemChanged;
-        private bool _visibleGrid;
         #endregion
 
         #region Properties / Commands
@@ -57,42 +56,8 @@ namespace BMC.ViewModel
         {
             get; set;
         }
-
-
-        #endregion
-
-        #region Methods 
-
-        public void ChangeViewModel(BaseViewModel viewModel)
-        {
-            if (!PageViewHeatExchangeModels.Contains(viewModel))
-                PageViewHeatExchangeModels.Add(viewModel);
-
-            CurrentRecupViewPage = PageViewHeatExchangeModels
-                .FirstOrDefault(vm => vm == viewModel);
-        }
-
-        public bool VisibleGrid
-        {
-            get
-            {
-                return _visibleGrid;
-            }
-            set
-            {
-                _visibleGrid = value;
-            }
-        }
-
-
-        public static void SetToNull(HeatExchangeViewModel Current)
-        {
-            Current.VisibleGrid = false;
-        }
-        public static void SetToStandart(HeatExchangeViewModel Current)
-        {
-            Current.VisibleGrid = true;
-        }
+        
+        public bool VisibleGrid { get; set; }
 
         #endregion
 
@@ -117,6 +82,27 @@ namespace BMC.ViewModel
         }
         #endregion
 
+        #region Methods 
+
+        public void ChangeViewModel(BaseViewModel viewModel)
+        {
+            if (!PageViewHeatExchangeModels.Contains(viewModel))
+                PageViewHeatExchangeModels.Add(viewModel);
+
+            CurrentRecupViewPage = PageViewHeatExchangeModels
+                .FirstOrDefault(vm => vm == viewModel);
+        }
+        public static void SetToNull(HeatExchangeViewModel current)
+        {
+            current.VisibleGrid = false;
+        }
+        public static void SetToStandart(HeatExchangeViewModel current)
+        {
+            current.VisibleGrid = true;
+        }
+
+        #endregion
+
         #region Data Methods
         /// <summary>
         /// StringData[0]-Type of exchanger,StringData[1]-Temp. sensor,StringData[2]-Press. sensor
@@ -131,20 +117,20 @@ namespace BMC.ViewModel
             result.StringData.Add(BoolToStringConverter.BTS((bool)IsPressureSensor));
             if (SelectedValueHeaterExchange==RecupList[0])
             {
-                DataClass RotorResult = RotorVM.GetControlData();
-                if (RotorResult != null)
+                DataClass rotorControl = RotorVM.GetControlData();
+                if (rotorControl != null)
                 {
-                    result.IntData.AddRange(RotorResult.IntData);
-                    result.StringData.AddRange(RotorResult.StringData);
+                    result.IntData.AddRange(rotorControl.IntData);
+                    result.StringData.AddRange(rotorControl.StringData);
                 }
             }
             else if(SelectedValueHeaterExchange==RecupList[2])
                 {
-                DataClass PlateBypassResult = PlateBypassVM.GetControlData();
-                if (PlateBypassResult != null)
+                DataClass PlateBypassControl = PlateBypassVM.GetControlData();
+                if (PlateBypassControl != null)
                 {
-                    result.IntData.AddRange(PlateBypassResult.IntData);
-                    result.StringData.AddRange(PlateBypassResult.StringData);
+                    result.IntData.AddRange(PlateBypassControl.IntData);
+                    result.StringData.AddRange(PlateBypassControl.StringData);
                 }
                 }
             else if(SelectedValueHeaterExchange==RecupList[3])
@@ -167,29 +153,29 @@ namespace BMC.ViewModel
             DataClass result = new DataClass();
             if (SelectedValueHeaterExchange == RecupList[0])
             {
-                DataClass RotorResult = RotorVM.GetPowerData();
-                if (RotorResult != null)
+                DataClass rotorPower = RotorVM.GetPowerData();
+                if (rotorPower != null)
                 {
-                    result.IntData.AddRange(RotorResult.IntData);
-                    result.StringData.AddRange(RotorResult.StringData);
+                    result.IntData.AddRange(rotorPower.IntData);
+                    result.StringData.AddRange(rotorPower.StringData);
                 }
             }
             else if (SelectedValueHeaterExchange == RecupList[2])
             {
-                DataClass PlateBypassResult = PlateBypassVM.GetPowerData();
-                if (PlateBypassResult != null)
+                DataClass plateBypassPower = PlateBypassVM.GetPowerData();
+                if (plateBypassPower != null)
                 {
-                    result.IntData.AddRange(PlateBypassResult.IntData);
-                    result.StringData.AddRange(PlateBypassResult.StringData);
+                    result.IntData.AddRange(plateBypassPower.IntData);
+                    result.StringData.AddRange(plateBypassPower.StringData);
                 }
             }
             else if (SelectedValueHeaterExchange == RecupList[3])
             {
-                DataClass GlycolResult = GlycolVM.GetPowerData();
-                if (GlycolResult != null)
+                DataClass glycolPower = GlycolVM.GetPowerData();
+                if (glycolPower != null)
                 {
-                    result.IntData.AddRange(GlycolResult.IntData);
-                    result.StringData.AddRange(GlycolResult.StringData);
+                    result.IntData.AddRange(glycolPower.IntData);
+                    result.StringData.AddRange(glycolPower.StringData);
                 }
             }
             return result;

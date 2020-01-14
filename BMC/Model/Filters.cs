@@ -4,10 +4,14 @@ namespace BMC.Model
 {
     public class Filters:Pins
     {
+        #region Properties
         public int NumberofExhaustedFilters { get; set; }
         public string ExhaustedChosen { get; set; }
         public string ForcedChosen { get; set; }
         public int NumberOfForcedFilters { get; set; }
+        #endregion
+
+        #region Get Methods
         public static List<int> GetNumber ()
         {
             var result = new List<int> { 1, 2, 3 };
@@ -16,15 +20,16 @@ namespace BMC.Model
         /// <summary>
         ///  List[0]=AO,List[1]=DO,List[2]=AI,List[3]=DI
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="filterVM"></param>
         /// <returns></returns>
-        public List<int> GetPins(FilterViewModel p)
+        public List<int> GetPins(FilterViewModel filterVM)
         {
-            DataClass FilterResult = p.GetControlData();
-            DI += FilterResult.IntData[0];
-            DI += FilterResult.IntData[1];
+            DataClass filterControlData = filterVM.GetControlData();
+            DI += filterControlData.IntData[0];
+            DI += filterControlData.IntData[1];
             List<int> result =new List<int>{ AO,DO,AI,DI};
             return result;
         }
+        #endregion
     }
 }

@@ -10,11 +10,9 @@ namespace BMC.Model
     public class HeatExchange:Pins
     {
         #region Properties
-
         public string Type { get; set; }
         public string TempSensor { get; set; }
         public string PressureSensor { get; set; }
-
         #endregion
 
         #region Get Methods
@@ -27,22 +25,22 @@ namespace BMC.Model
         /// <summary>
         /// List[0]-AO,List[1]-DO,List[2]-AI,List[3]-DI
         /// </summary>
-        public List<int> GetPins(HeatExchangeViewModel bm)
+        public List<int> GetPins(HeatExchangeViewModel heatExchangeVM)
         {
-            Glycol GlycolM = new Glycol();
-            Rotor RotorM = new Rotor();
-            PlateWithBypass PlateBPM = new PlateWithBypass();
-            DataClass HeatExchangeControlResult = bm.GetControlData();
-            Type = HeatExchangeControlResult.StringData[0];
-            TempSensor = HeatExchangeControlResult.StringData[1];
-            PressureSensor = HeatExchangeControlResult.StringData[2];
+            Glycol glycolM = new Glycol();
+            Rotor rotorM = new Rotor();
+           // PlateWithBypass plateBP = new PlateWithBypass();
+            DataClass heatExchangeControlData = heatExchangeVM.GetControlData();
+            Type = heatExchangeControlData.StringData[0];
+            TempSensor = heatExchangeControlData.StringData[1];
+            PressureSensor = heatExchangeControlData.StringData[2];
             if (TempSensor == "Да") AI += 1;
             if (PressureSensor == "Да") DI += 1;
             if (Type == "Роторный")
             {
                 AO += 1; DO += 1; DI += 1; AI += 2;                            //standart speed regulation 0-10V + 2Temp sensors in channels
-                RotorM.SpeedSignal = HeatExchangeControlResult.StringData[3];
-                if (RotorM.SpeedSignal == "MODBUS RTU")
+                rotorM.SpeedSignal = heatExchangeControlData.StringData[3];
+                if (rotorM.SpeedSignal == "MODBUS RTU")
                 {
                     AO -= 1; DO -= 1; DI -= 1;
                 }
@@ -51,29 +49,28 @@ namespace BMC.Model
             else if (Type == "Гликолевый")
             {
                 DO += 1;
-                GlycolM.VentStatus = HeatExchangeControlResult.StringData[3];
-                if (GlycolM.VentStatus == "Да")
+                glycolM.VentStatus = heatExchangeControlData.StringData[3];
+                if (glycolM.VentStatus == "Да")
                 {
                     AO += 1;
                     AI += 2;
                 }
-            }
-            
+            }            
             List<int> result = new List<int> { AO, DO, AI, DI };
             return result;
         }
 
-        public List<PowerObject> GetPowerParts(HeatExchangeViewModel p)
+        public List<PowerObject> GetPowerParts(HeatExchangeViewModel heatExchangerVM)
         {
-            DataClass HeatExchangeControlResult = p.GetControlData();
-            DataClass HeatExchangePowerResult = p.GetPowerData();
-            List<PowerObject> HeatExchangeResult = new List<PowerObject>();
-            if (HeatExchangeControlResult.StringData[0] == "Роторный")
+            DataClass heatExchangeControlData = heatExchangerVM.GetControlData();
+            DataClass heatExchangePowerData = heatExchangerVM.GetPowerData();
+            List<PowerObject> heatExchangeResult = new List<PowerObject>();
+            if (heatExchangeControlData.StringData[0] == "Роторный")
             {
-                if (HeatExchangePowerResult.StringData[1] == "Частотный преобразователь")
+                if (heatExchangePowerData.StringData[1] == "Частотный преобразователь")
                 {
-                    HeatExchangeResult.AddRange(GetPCH(HeatExchangePowerResult));
-                    if (HeatExchangePowerResult.StringData[2] == "0-10 В")
+                    heatExchangeResult.AddRange(GetPCH(heatExchangePowerData));
+                    if (heatExchangePowerData.StringData[2] == "0-10 В")
                     {
                         //organize 0-10В
                     }
@@ -82,39 +79,36 @@ namespace BMC.Model
                         //MODBUS RTU?
                     }
                 }
-                else HeatExchangeResult.AddRange(GetAuto(HeatExchangePowerResult));
+                else heatExchangeResult.AddRange(GetAuto(heatExchangePowerData));
             }
-            else if (HeatExchangeControlResult.StringData[0] == "Гликолевый")
+            else if (heatExchangeControlData.StringData[0] == "Гликолевый")
             {
-                if (HeatExchangeControlResult.StringData[3] == "Да")
+                if (heatExchangeControlData.StringData[3] == "Да")
                 {
                     //привод 24/220 бд
                 }
-                HeatExchangeResult.AddRange(GetAuto(HeatExchangePowerResult));
+                heatExchangeResult.AddRange(GetAuto(heatExchangePowerData));
             }
-            else if(HeatExchangeControlResult.StringData[0]=="Пластинчатый с байпасом")
+            else if(heatExchangeControlData.StringData[0]=="Пластинчатый с байпасом")
             {
                 //24/220 - бд?
             }
             return null;
         }
-
         #endregion
 
         #region Database
-
-        private List<PowerObject> GetPCH(DataClass p)
+        private List<PowerObject> GetPCH(DataClass PCH)
         {
             //считать с бд выбор пч 
             return null;
         }
 
-        private List<PowerObject> GetAuto(DataClass p)
+        private List<PowerObject> GetAuto(DataClass PCH)
         {
             //считать с бд автоматы и контакты
             return null;
         }
-
         #endregion
     }
 }

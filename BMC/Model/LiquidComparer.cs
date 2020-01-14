@@ -2,7 +2,7 @@
 
 namespace BMC.Model
 {
-    class DistinctLiquid : IEqualityComparer<LiquidModel>
+    class LiquidComparer : IEqualityComparer<LiquidModel>
     {
 
         public bool Equals(LiquidModel x, LiquidModel y)

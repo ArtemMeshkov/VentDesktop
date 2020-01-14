@@ -136,17 +136,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Abstract\IRepository.cs" />
-    <Compile Include="DataBase\atv212.cs" />
-    <Compile Include="DataBase\gv2.cs" />
-    <Compile Include="DataBase\loadswitch.cs" />
+    <Compile Include="DataBase\ATV212.cs" />
+    <Compile Include="DataBase\GV2.cs" />
+    <Compile Include="DataBase\LoadSwitch.cs" />
     <Compile Include="Model\ControlChoosingMathModel.cs" />
     <Compile Include="Model\DataClass.cs" />
-    <Compile Include="Model\DistinctLiquid.cs" />
+    <Compile Include="Model\LiquidComparer.cs" />
     <Compile Include="Model\Gates.cs" />
     <Compile Include="Model\HeatExchanger\Glycol.cs" />
     <Compile Include="Model\HeatExchanger\HeatExchange.cs" />
     <Compile Include="Model\HoneyCombsModel.cs" />
-    <Compile Include="Model\ListOfShields.cs" />
+    <Compile Include="Model\Shield.cs" />
     <Compile Include="Model\Pins.cs" />
     <Compile Include="Model\HeatExchanger\PlateWithBypass.cs" />
     <Compile Include="Model\HeatExchanger\Plate.cs" />
@@ -161,7 +161,7 @@
     <Compile Include="Model\Humid.cs" />
     <Compile Include="Model\Heater\LiquidModel.cs" />
     <Compile Include="Model\Recirc.cs" />
-    <Compile Include="Model\Sbor.cs" />
+    <Compile Include="Model\AllPartsData.cs" />
     <Compile Include="Model\VentSettings.cs" />
     <Compile Include="ViewModel\Commands\BoolToStringConverter.cs" />
     <Compile Include="ViewModel\Interfaces and BaseClasses\BaseViewModel.cs" />
@@ -180,7 +180,7 @@
     <Compile Include="ViewModel\Interfaces and BaseClasses\ICommonData.cs" />
     <Compile Include="ViewModel\SettingsVM\Heater\LiquidViewModel.cs" />
     <Compile Include="ViewModel\PageChanges and FullVm\PageChangeSettings.cs" />
-    <Compile Include="ViewModel\PageChanges and FullVm\PageChangeVentTypes.cs" />
+    <Compile Include="ViewModel\PageChanges and FullVm\MainWindowVM.cs" />
     <Compile Include="ViewModel\PageChanges and FullVm\FullViewModel.cs" />
     <Compile Include="ViewModel\SettingsVM\HeatExchanger\PlateViewModel.cs" />
     <Compile Include="ViewModel\SettingsVM\HeatExchanger\PlateWithBypassViewModel.cs" />

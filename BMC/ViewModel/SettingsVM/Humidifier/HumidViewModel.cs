@@ -74,19 +74,6 @@ namespace BMC.ViewModel
             }
         }
 
-        #endregion
-
-        #region Methods 
-
-        public void ChangeViewModel(BaseViewModel viewModel)
-        {
-            if (!PageViewHumidModels.Contains(viewModel))
-                PageViewHumidModels.Add(viewModel);
-
-            CurrentPageHumidViewModel = PageViewHumidModels
-                .FirstOrDefault(vm => vm == viewModel);
-        }
-
         public bool VisibleGrid
         {
             get
@@ -98,15 +85,27 @@ namespace BMC.ViewModel
                 _visibleGrid = value;
             }
         }
+        
+        #endregion
 
+        #region Methods 
 
-        public static void SetToNull(HumidViewModel Current)
+        public void ChangeViewModel(BaseViewModel viewModel)
         {
-            Current.VisibleGrid = false;
+            if (!PageViewHumidModels.Contains(viewModel))
+                PageViewHumidModels.Add(viewModel);
+
+            CurrentPageHumidViewModel = PageViewHumidModels
+                .FirstOrDefault(vm => vm == viewModel);
+        }        
+
+        public static void SetToNull(HumidViewModel current)
+        {
+            current.VisibleGrid = false;
         }
-        public static void SetToStandart(HumidViewModel Current)
+        public static void SetToStandart(HumidViewModel current)
         {
-            Current.VisibleGrid = true;
+            current.VisibleGrid = true;
         }
 
         #endregion
@@ -137,9 +136,9 @@ namespace BMC.ViewModel
             result.StringData.Add(SelectedValueHumidVar);
             if (SelectedValueHumidVar == HumidList[1])
             {
-                DataClass HoneyCombsResult = HoneyCombsVM.GetControlData();
-                result.IntData.AddRange(HoneyCombsResult.IntData);
-                result.StringData.AddRange(HoneyCombsResult.StringData);
+                DataClass honeyCombsControl = HoneyCombsVM.GetControlData();
+                result.IntData.AddRange(honeyCombsControl.IntData);
+                result.StringData.AddRange(honeyCombsControl.StringData);
             }
             return result;
 
@@ -153,9 +152,9 @@ namespace BMC.ViewModel
             DataClass result = new DataClass();
             if (SelectedValueHumidVar == HumidList[1])
             {
-                DataClass HoneyCombsResult = HoneyCombsVM.GetPowerData();
-                result.IntData.AddRange(HoneyCombsResult.IntData);
-                result.StringData.AddRange(HoneyCombsResult.StringData);
+                DataClass honeyCombsPower = HoneyCombsVM.GetPowerData();
+                result.IntData.AddRange(honeyCombsPower.IntData);
+                result.StringData.AddRange(honeyCombsPower.StringData);
             }
             return result;
         }

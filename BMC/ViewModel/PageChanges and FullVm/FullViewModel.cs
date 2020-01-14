@@ -39,17 +39,17 @@ namespace BMC.ViewModel
             set
             {
                 _selectedValueHeater = value;
-                PageChangeVentTypes status = PageChangeVentTypes.GetStatus();
+                MainWindowVM status = MainWindowVM.GetStatus();
                 if (status != null)
                 {
-                    PageChangeVentTypes k = PageChangeVentTypes.GetInstance();
+                    MainWindowVM instance = MainWindowVM.GetInstance();
                     if (_selectedValueHeater == "Нет")
                     {
-                        HeaterViewModel.SetToNull(k.HeaterVM);
+                        HeaterViewModel.SetToNull(instance.HeaterVM);
                     }
                     else
                     {
-                        HeaterViewModel.SetToStandart(k.HeaterVM);
+                        HeaterViewModel.SetToStandart(instance.HeaterVM);
                     }
                 }
             }
@@ -63,14 +63,14 @@ namespace BMC.ViewModel
             set
             {
                 _selectedValueCooler = value;
-                PageChangeVentTypes status = PageChangeVentTypes.GetStatus();
+                MainWindowVM status = MainWindowVM.GetStatus();
                 if (status != null)
                 {
-                    PageChangeVentTypes k = PageChangeVentTypes.GetInstance();
+                    MainWindowVM instance = MainWindowVM.GetInstance();
                     if (_selectedValueCooler == "Нет")
-                        CoolerViewModel.SetToNull(k.CoolerVM);
+                        CoolerViewModel.SetToNull(instance.CoolerVM);
                     else
-                        CoolerViewModel.SetToStandart(k.CoolerVM);
+                        CoolerViewModel.SetToStandart(instance.CoolerVM);
                 }
             }
         }
@@ -83,14 +83,14 @@ namespace BMC.ViewModel
             set
             {
                 _selectedValueHumid = value;
-                PageChangeVentTypes status = PageChangeVentTypes.GetStatus();
+                MainWindowVM status = MainWindowVM.GetStatus();
                 if (status != null)
                 {
-                    PageChangeVentTypes k = PageChangeVentTypes.GetInstance();
+                    MainWindowVM instance = MainWindowVM.GetInstance();
                     if (_selectedValueHumid == "Нет")
-                        HumidViewModel.SetToNull(k.HumidVM);
+                        HumidViewModel.SetToNull(instance.HumidVM);
                     else
-                        HumidViewModel.SetToStandart(k.HumidVM);
+                        HumidViewModel.SetToStandart(instance.HumidVM);
                 }
             }
         }
@@ -103,14 +103,14 @@ namespace BMC.ViewModel
             set
             {
                 _selectedValueHEx = value;
-                PageChangeVentTypes status = PageChangeVentTypes.GetStatus();
+                MainWindowVM status = MainWindowVM.GetStatus();
                 if (status != null)
                 {
-                    PageChangeVentTypes k = PageChangeVentTypes.GetInstance();
+                    MainWindowVM instance = MainWindowVM.GetInstance();
                     if (_selectedValueHEx == "Нет")
-                        HeatExchangeViewModel.SetToNull(k.HEVM);
+                        HeatExchangeViewModel.SetToNull(instance.HeatExchangeVM);
                     else
-                        HeatExchangeViewModel.SetToStandart(k.HEVM);
+                        HeatExchangeViewModel.SetToStandart(instance.HeatExchangeVM);
                 }
             }
         }
@@ -123,14 +123,14 @@ namespace BMC.ViewModel
             set
             {
                 _selectedValueRecirc = value;
-                PageChangeVentTypes status = PageChangeVentTypes.GetStatus();
+                MainWindowVM status = MainWindowVM.GetStatus();
                 if (status != null)
                 {
-                    PageChangeVentTypes k = PageChangeVentTypes.GetInstance();
+                    MainWindowVM instance = MainWindowVM.GetInstance();
                     if (_selectedValueRecirc == "Нет")
-                        RecircViewModel.SetToNull(k.RecircVM);
+                        RecircViewModel.SetToNull(instance.RecircVM);
                     else
-                        RecircViewModel.SetToStandart(k.RecircVM);
+                        RecircViewModel.SetToStandart(instance.RecircVM);
                 }
             }
         }
@@ -143,14 +143,14 @@ namespace BMC.ViewModel
             set
             {
                 _selectedValueGates = value;
-                PageChangeVentTypes status = PageChangeVentTypes.GetStatus();
+                MainWindowVM status = MainWindowVM.GetStatus();
                 if (status != null)
                 {
-                    PageChangeVentTypes k = PageChangeVentTypes.GetInstance();
+                    MainWindowVM instance = MainWindowVM.GetInstance();
                     if (_selectedValueGates == "Нет")
-                        GatesViewModel.SetToNull(k.GatesVM);
+                        GatesViewModel.SetToNull(instance.GatesVM);
                     else
-                        GatesViewModel.SetToStandart(k.GatesVM);
+                        GatesViewModel.SetToStandart(instance.GatesVM);
                 }
             }
         }
@@ -164,14 +164,14 @@ namespace BMC.ViewModel
             set
             {
                 _selectedValueFilter = value;
-                PageChangeVentTypes status = PageChangeVentTypes.GetStatus();
+                MainWindowVM status = MainWindowVM.GetStatus();
                 if (status != null)
                 {
-                    PageChangeVentTypes k = PageChangeVentTypes.GetInstance();
+                    MainWindowVM instance = MainWindowVM.GetInstance();
                     if (_selectedValueFilter == "Нет")
-                        FilterViewModel.SetToNull(k.FilterVM);
+                        FilterViewModel.SetToNull(instance.FilterVM);
                     else
-                        FilterViewModel.SetToStandart(k.FilterVM);
+                        FilterViewModel.SetToStandart(instance.FilterVM);
                 }
             }
         }
@@ -180,7 +180,7 @@ namespace BMC.ViewModel
         {
             get
             {
-                _invisForForcedAndExhausted = (PageChangeVentTypes.GetInstance().ForcedIsChecked|| PageChangeVentTypes.GetInstance().ExhaustedIsChecked);
+                _invisForForcedAndExhausted = (MainWindowVM.GetInstance().ForcedIsChecked|| MainWindowVM.GetInstance().ExhaustedIsChecked);
                 return _invisForForcedAndExhausted;
             }
             set
@@ -192,7 +192,7 @@ namespace BMC.ViewModel
         {
             get
             {
-                _invisForExhausted = PageChangeVentTypes.GetInstance().ExhaustedIsChecked;
+                _invisForExhausted = MainWindowVM.GetInstance().ExhaustedIsChecked;
                 return _invisForExhausted;
             }
             set
@@ -204,7 +204,7 @@ namespace BMC.ViewModel
         {
             get
             {
-                _invisForForced = PageChangeVentTypes.GetInstance().ForcedIsChecked;
+                _invisForForced = MainWindowVM.GetInstance().ForcedIsChecked;
                 return _invisForForced;
             }
             set
@@ -243,12 +243,10 @@ namespace BMC.ViewModel
         #region Methods
         public void TransferIntoMain(int p)
         {
-            PageChangeVentTypes k = PageChangeVentTypes.GetInstance();
-            k.TakenData = p;
+            MainWindowVM instance = MainWindowVM.GetInstance();
+            instance.TakenData = p;
         }
-
-
-        
+                       
         private static List<string> GetVariants()
         {
             var result = new List<string> { "Да", "Нет" };

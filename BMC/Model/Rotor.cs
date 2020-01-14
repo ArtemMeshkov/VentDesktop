@@ -9,11 +9,15 @@ namespace BMC.Model
 {
     public class Rotor
     {
+        #region Properties
         public int RecupPower { get; set; }
         public DoubleCollection Power220 { get; set; }
         public DoubleCollection Power380 { get; set; }
         public string SpeedRegulator { get; set; }
         public string SpeedSignal { get; set; }
+        #endregion
+
+        #region Get Methods
         public static List<int> GetPower()
         {
             var result=new List<int>{220,380};
@@ -39,5 +43,6 @@ namespace BMC.Model
             var result = new List<string> { "0-10 В", "MODBUS RTU" };
             return result;
         }
+        #endregion
     }
 }

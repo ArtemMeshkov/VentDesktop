@@ -13,30 +13,21 @@ namespace BMC.ViewModel
 {
     public class ListsOfShields : BaseViewModel
     {
-        private  ICommand _addItemCommand;
-        private  Shield _selectedShield;
+        #region Private members
+        private ICommand _addItemCommand;
         public  ObservableCollection<Shield> ShieldLists { get; set; }
         public  Shield SelectedShield { get; set; }
-        private  ObservableCollection<Shield> _selectedItem;
         private  ICommand _getInfo;
         private  ICommand _getFullInfo;
         private  ICommand _deleteCommand;
         private ICommand _addToListCommand;
+        #endregion
 
-        public  int SelectedIndexNew{get;set;}
+        #region Properties/commands
+        public int SelectedIndexNew{get;set;}
         public string SystemName{ get; set; } = null;
         public  ObservableCollection<Shield> NewShieldList
-        {get;set;
-        }
-
-        public ListsOfShields()
-        {
-            ShieldLists = new ObservableCollection<Shield>();
-            NewShieldList = new ObservableCollection<Shield>();
-            SelectedIndexNew = -1;
-           
-
-        }
+        {get;set;}       
 
         public ICommand AddItemCommand
         {
@@ -117,11 +108,21 @@ namespace BMC.ViewModel
                 return _deleteCommand;
             }
         }
+        #endregion
+
+        #region Constructor
+        public ListsOfShields()
+        {
+            ShieldLists = new ObservableCollection<Shield>();
+            NewShieldList = new ObservableCollection<Shield>();
+            SelectedIndexNew = -1;            
+        }
+        #endregion
+
+        #region Methods
         private void AddToList()
         {
-            int index = 0;
-            PageChangeVentTypes k = PageChangeVentTypes.GetInstance();
-         
+            int index = 0;         
             if (SelectedShield != null)
             {
                 if (!NewShieldList.Contains(SelectedShield))
@@ -143,6 +144,7 @@ namespace BMC.ViewModel
             else
                 MessageBox.Show("Выберите систему");
         }
+
         private void Delete()
         {
             int index = SelectedIndexNew;
@@ -152,15 +154,13 @@ namespace BMC.ViewModel
                 MessageBox.Show("Выберите элемент, который хотите удалить!", "Ошибка");
            //Доделать реализацию удаления одного элемента, а не всех из коллекции
             
-           // List<PowerObject> asd = VentSettings.GetPCH(220,"2");
-
         }
 
         private void GetItem()
         {
-            Shield k = SelectedShield;
-            if(k!=null)
-            MessageBox.Show("Выбранная конфигурация - DI = " +k.ControlList[0].ToString()+ " DO = " + k.ControlList[1].ToString() + " AI = " + k.ControlList[2].ToString()+ " AO = " + k.ControlList[3].ToString());
+            Shield selectedShield = SelectedShield;
+            if(selectedShield!=null)
+            MessageBox.Show("Выбранная конфигурация - DI = " +selectedShield.GetControlInfo()[0].ToString()+ " DO = " + selectedShield.GetControlInfo()[1].ToString() + " AI = " + selectedShield.GetControlInfo().ToString()+ " AO = " + selectedShield.GetControlInfo().ToString());
         }
 
         private void GetFullInfo()
@@ -171,33 +171,40 @@ namespace BMC.ViewModel
             {
                 for (int i = 0; i <= 3; i++)
                 {
-                    result[i] += p.ControlList[i];
+                    result[i] += p.GetControlInfo()[i];
                 }
             }
-            Sbor newSbor = new Sbor();
-            var control = newSbor.GetControlParts(result[0], result[1], result[2], result[3]);
+            AllPartsData newSbor = new AllPartsData();
+            var control = newSbor.GetControlParts(result[0], result[1], result[2], result[3]); // Для теста
             MessageBox.Show("Выбранная конфигурация - DI = " + result[0] + " DO = " + result[1] + " AI = " + result[2] + " AO = " + result[3]);
         }
 
         private void AddItem()
         {
-            Shield SystemShield = new Shield();
+            int count = 0;
+            Shield systemShield = new Shield();
             if (!String.IsNullOrEmpty(SystemName))
             {
-                SystemShield.Name = SystemName;
-                SystemShield.GetControlInfo();
-                SystemShield.GetPowerInfo();
-                ShieldLists.Add(SystemShield);
-               
+                systemShield.Name = SystemName;
+                systemShield.GetControlInfo();
+                systemShield.GetPowerInfo();
+                foreach(var shield in ShieldLists)
+                {
+                    if (shield.Name.Trim() == systemShield.Name.Trim())
+                    {
+                        count++;
+                    }
+                }
+                if (count == 0)
+                    ShieldLists.Add(systemShield);
+                else
+                    MessageBox.Show("Вы уже вводили данное название системы, введите другое.");
             }
             else
                 MessageBox.Show("Введите название вашей системы!");
 
         }
 
-        private void CheckForTheSame()
-        {
-           
-        }
+        #endregion
     }
 }

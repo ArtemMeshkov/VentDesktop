@@ -4,10 +4,9 @@ using BMC.Model;
 namespace BMC.ViewModel
 {
     public class GatesViewModel : BaseViewModel
-    {
-        private bool _visibleGrid;
-        
+    {               
         #region Properties
+
         public bool? SpringReturn { get; set; }
         public List<string> ControlType { get; set; }
         public bool? IsSelectedForced { get; set; }
@@ -17,30 +16,21 @@ namespace BMC.ViewModel
         public List<int> FPower { get; set; }
         public List<int> ExhPower { get; set; }
         public string SelectedControl { get; set; }
+
         #endregion
 
         #region Metods
 
-        public bool VisibleGrid
-        {
-            get
-            {
-                return _visibleGrid;
-            }
-            set
-            {
-                _visibleGrid = value;
-            }
-        }
+        public bool VisibleGrid { get; set; }
 
 
-        public static void SetToNull(GatesViewModel Current)
+        public static void SetToNull(GatesViewModel current)
         {
-            Current.VisibleGrid = false;
+            current.VisibleGrid = false;
         }
-        public static void SetToStandart(GatesViewModel Current)
+        public static void SetToStandart(GatesViewModel current)
         {
-            Current.VisibleGrid = true;
+            current.VisibleGrid = true;
         }
 
         private static List<string> GetControl()

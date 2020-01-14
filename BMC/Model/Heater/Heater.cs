@@ -6,14 +6,11 @@ namespace BMC.Model
     public class Heater: Pins
     {
         #region Properties
-
         public string Type { get ; set; }
         public string ExtraType { get; set; }
-
         #endregion
 
         #region Get Methods
-
         public static List<string> GetHeater()
         {
             List<string> result = new List<string>();
@@ -24,66 +21,66 @@ namespace BMC.Model
         /// <summary>
         /// List[0]-AO,List[1]-DO,List[2]-AI,List[3]-DI(+AI with /no recirc 2/1)
         /// </summary>
-        public List<int> GetPins(HeaterViewModel p)
+        public List<int> GetPins(HeaterViewModel heaterVM)
         {
-            LiquidModel LiquidM = new LiquidModel();
-            ElectricModel ElectricM = new ElectricModel();
-            LiquidModel ExtraLiquid = new LiquidModel();
-            ElectricModel ExtraElectric = new ElectricModel();
-            DataClass HeaterControlData = p.GetControlData();
-            Type = HeaterControlData.StringData[0];
+            LiquidModel liquidM = new LiquidModel();
+            ElectricModel electricM = new ElectricModel();
+            LiquidModel extraLiquid = new LiquidModel();
+            ElectricModel extraElectric = new ElectricModel();
+            DataClass heaterControlData = heaterVM.GetControlData();
+            Type = heaterControlData.StringData[0];
             if (Type == "Жидкостный")
             {
                 AO += 1;
                 DO += 1;
                 AI += 1;
-                LiquidM.AirTemp = HeaterControlData.StringData[1];
-                if (LiquidM.AirTemp == "Да")
+                liquidM.AirTemp = heaterControlData.StringData[1];
+                if (liquidM.AirTemp == "Да")
                     DI += 1;
             }
             else
             {
-                ElectricM.FirstStage = HeaterControlData.StringData[1];
-                ElectricM.NumOfStages = HeaterControlData.IntData[0];
-                ElectricM.ThermoSwitch = HeaterControlData.IntData[1];
-                if (ElectricM.FirstStage == "Да")
+                electricM.FirstStage = heaterControlData.StringData[1];
+                electricM.NumOfStages = heaterControlData.IntData[0];
+                electricM.ThermoSwitch = heaterControlData.IntData[1];
+                if (electricM.FirstStage == "Да")
                     AO += 1;
-                DO += ElectricM.NumOfStages;
-                DI += ElectricM.ThermoSwitch; 
+                DO += electricM.NumOfStages;
+                DI += electricM.ThermoSwitch; 
             }
-            if (p.ExtraHeater == true)
+            if (heaterVM.ExtraHeater == true)
             {
-                ExtraType = HeaterControlData.StringData[2];
+                ExtraType = heaterControlData.StringData[2];
                 if (ExtraType == "Жидкостный")
                 {
                     AO += 1;
                     DO += 1;
                     AI += 1;
-                    ExtraLiquid.AirTemp = HeaterControlData.StringData[3];
-                    if (ExtraLiquid.AirTemp == "Да")
+                    extraLiquid.AirTemp = heaterControlData.StringData[3];
+                    if (extraLiquid.AirTemp == "Да")
                         DI += 1;
                 }
                 else
                 {
                     if (Type != "Жидкостный")
                     {
-                        ExtraElectric.FirstStage = HeaterControlData.StringData[3];
-                        ExtraElectric.NumOfStages = HeaterControlData.IntData[2];
-                        ExtraElectric.ThermoSwitch = HeaterControlData.IntData[3];
-                        if (ElectricM.FirstStage == "Да")
+                        extraElectric.FirstStage = heaterControlData.StringData[3];
+                        extraElectric.NumOfStages = heaterControlData.IntData[2];
+                        extraElectric.ThermoSwitch = heaterControlData.IntData[3];
+                        if (electricM.FirstStage == "Да")
                             AO += 1;
-                        DO += ExtraElectric.NumOfStages;
-                        DI += ExtraElectric.ThermoSwitch;
+                        DO += extraElectric.NumOfStages;
+                        DI += extraElectric.ThermoSwitch;
                     }
                     else
                     {
-                        ExtraElectric.FirstStage = HeaterControlData.StringData[3];
-                        ExtraElectric.NumOfStages = HeaterControlData.IntData[0];
-                        ExtraElectric.ThermoSwitch = HeaterControlData.IntData[1];
-                        if (ElectricM.FirstStage == "Да")
+                        extraElectric.FirstStage = heaterControlData.StringData[3];
+                        extraElectric.NumOfStages = heaterControlData.IntData[0];
+                        extraElectric.ThermoSwitch = heaterControlData.IntData[1];
+                        if (electricM.FirstStage == "Да")
                             AO += 1;
-                        DO += ExtraElectric.NumOfStages;
-                        DI += ExtraElectric.ThermoSwitch;
+                        DO += extraElectric.NumOfStages;
+                        DI += extraElectric.ThermoSwitch;
                     }
 
                 }
@@ -92,48 +89,47 @@ namespace BMC.Model
             return result;
         }
 
-        public List<PowerObject> GetPowerParts(HeaterViewModel p)
+        public List<PowerObject> GetPowerParts(HeaterViewModel heaterVM)
         {
-            DataClass HeaterControlData = p.GetControlData();
-            DataClass HeaterPowerData = p.GetPowerData();
-            List<PowerObject> Result = new List<PowerObject>();
-            if (HeaterControlData.StringData[0] == "Жидкостный")
+            DataClass heaterControlData = heaterVM.GetControlData();
+            DataClass heaterPowerData = heaterVM.GetPowerData();
+            List<PowerObject> result = new List<PowerObject>();
+            if (heaterControlData.StringData[0] == "Жидкостный")
             {
-                Result.AddRange(GetAuto(HeaterPowerData));
-                Result.AddRange(GetVent(HeaterPowerData));
-                if (HeaterPowerData.StringData[0] == "Да") { //что-то для термостата?
+                result.AddRange(GetAuto(heaterPowerData));
+                result.AddRange(GetVent(heaterPowerData));
+                if (heaterPowerData.StringData[0] == "Да") { //что-то для термостата?
                 }
                 
             }
             else
             {
-                if (HeaterPowerData.StringData[0] == "Да")
-                    Result.AddRange(GetPCH(HeaterPowerData));
+                if (heaterPowerData.StringData[0] == "Да")
+                    result.AddRange(GetPCH(heaterPowerData));
                 else
-                    Result.AddRange(GetAuto(HeaterPowerData));
+                    result.AddRange(GetAuto(heaterPowerData));
             }
-            if (p.ExtraHeater == true)
+            if (heaterVM.ExtraHeater == true)
             {
-                if (HeaterControlData.StringData[1] == "Жидкостный")
+                if (heaterControlData.StringData[1] == "Жидкостный")
                 {
-                    Result.AddRange(GetAuto(HeaterPowerData));
-                    Result.AddRange(GetVent(HeaterPowerData));
-                    if (HeaterPowerData.StringData[1] == "Да")
+                    result.AddRange(GetAuto(heaterPowerData));
+                    result.AddRange(GetVent(heaterPowerData));
+                    if (heaterPowerData.StringData[1] == "Да")
                     { //что-то для термостата?
                     }
 
                 }
                 else
                 {
-                    if (HeaterPowerData.StringData[1] == "Да")
-                        Result.AddRange(GetPCH(HeaterPowerData));
+                    if (heaterPowerData.StringData[1] == "Да")
+                        result.AddRange(GetPCH(heaterPowerData));
                     else
-                        Result.AddRange(GetAuto(HeaterPowerData));
+                        result.AddRange(GetAuto(heaterPowerData));
                 }
             }
-            return Result;
+            return result;
         }
-
         #endregion
 
         #region Database 
