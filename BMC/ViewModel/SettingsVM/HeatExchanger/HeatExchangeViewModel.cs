@@ -111,7 +111,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetControlData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.StringData.Add(SelectedValueHeaterExchange);
             result.StringData.Add(BoolToStringConverter.BTS((bool)IsTempSensor));
             result.StringData.Add(BoolToStringConverter.BTS((bool)IsPressureSensor));
@@ -150,7 +150,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetPowerData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             if (SelectedValueHeaterExchange == RecupList[0])
             {
                 DataClass rotorPower = RotorVM.GetPowerData();

@@ -43,7 +43,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetControlData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.StringData.Add(BoolToStringConverter.BTS((bool)PCHChecked));
             result.StringData.Add(BoolToStringConverter.BTS((bool)ReserveChecked));
             result.StringData.Add(SelectedType);
@@ -56,7 +56,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetPowerData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.IntData.Add(SelectedVentPower);
             result.StringData.Add(SelectedDrivePower.ToString());
             result.StringData.Add(BoolToStringConverter.BTS((bool)PCHChecked));

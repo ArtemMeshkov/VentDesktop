@@ -13,7 +13,7 @@ namespace BMC.Model
         #region Get Methods
         public static List<string> GetHeater()
         {
-            List<string> result = new List<string>();
+           var result = new List<string>();
             result.Add("Жидкостный");
             result.Add("Электрический");
             return result;
@@ -23,11 +23,11 @@ namespace BMC.Model
         /// </summary>
         public List<int> GetPins(HeaterViewModel heaterVM)
         {
-            LiquidModel liquidM = new LiquidModel();
-            ElectricModel electricM = new ElectricModel();
-            LiquidModel extraLiquid = new LiquidModel();
-            ElectricModel extraElectric = new ElectricModel();
-            DataClass heaterControlData = heaterVM.GetControlData();
+            var liquidM = new LiquidModel();
+            var electricM = new ElectricModel();
+            var extraLiquid = new LiquidModel();
+            var extraElectric = new ElectricModel();
+            var heaterControlData = heaterVM.GetControlData();
             Type = heaterControlData.StringData[0];
             if (Type == "Жидкостный")
             {
@@ -85,7 +85,7 @@ namespace BMC.Model
 
                 }
             }
-            List<int> result = new List<int> { AO, DO, AI, DI };
+            var result = new List<int> { AO, DO, AI, DI };
             return result;
         }
 
@@ -93,7 +93,7 @@ namespace BMC.Model
         {
             DataClass heaterControlData = heaterVM.GetControlData();
             DataClass heaterPowerData = heaterVM.GetPowerData();
-            List<PowerObject> result = new List<PowerObject>();
+           var result = new List<PowerObject>();
             if (heaterControlData.StringData[0] == "Жидкостный")
             {
                 result.AddRange(GetAuto(heaterPowerData));

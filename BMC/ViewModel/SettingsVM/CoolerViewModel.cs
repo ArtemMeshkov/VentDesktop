@@ -129,7 +129,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetControlData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.StringData.Add(SelectedType);
             result.StringData.Add(BoolToStringConverter.BTS((bool)DryerChecked));
             result.StringData.Add(BoolToStringConverter.BTS((bool)ExtraHeaterChecked));
@@ -153,7 +153,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetPowerData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             //result.StringData.Add(BoolToStringConverter.BTS((bool)ExtraHeaterChecked));
             if (SelectedType == CoolerTypes[0])
                 result.IntData.Add(SelectedPumpPower);

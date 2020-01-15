@@ -27,7 +27,7 @@ namespace BMC.Model
             DataClass filterControlData = filterVM.GetControlData();
             DI += filterControlData.IntData[0];
             DI += filterControlData.IntData[1];
-            List<int> result =new List<int>{ AO,DO,AI,DI};
+            var result =new List<int>{ AO,DO,AI,DI};
             return result;
         }
         #endregion

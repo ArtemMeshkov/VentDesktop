@@ -24,17 +24,17 @@ namespace BMC.Model
         #region Get methods
         public static List<int> GetVentPower()
         {
-            List<int> result = new List<int> { 380, 220 };
+            var result = new List<int> { 380, 220 };
             return result;
         }
         public static List<string> GetPCHTypes()
         {
-            List<string> result = new List<string> { "Подача питания", "Внешние контакты", "MODBUS RTU" };
+            var result = new List<string> { "Подача питания", "Внешние контакты", "MODBUS RTU" };
             return result;
         }
         public static DoubleCollection GetDrivePower()
         {
-            DoubleCollection result = new DoubleCollection { 0.18, 0.25, 0.37, 0.55, 0.75, 1.1, 1.5, 2.2, 3.0, 4.0, 5.5, 7.5, 11.0, 15.0, 18.0, 22.0, 30.0 };
+            var result = new DoubleCollection { 0.18, 0.25, 0.37, 0.55, 0.75, 1.1, 1.5, 2.2, 3.0, 4.0, 5.5, 7.5, 11.0, 15.0, 18.0, 22.0, 30.0 };
             return result;
         }
         public List<int> GetPins(VentSettingViewModel ventSettingsVM)
@@ -138,14 +138,14 @@ namespace BMC.Model
                 DI += eDI;
             }
             else { }
-            List<int> newResult = new List<int> { AO, DO, AI, DI };
+            var newResult = new List<int> { AO, DO, AI, DI };
             return newResult;
         }
 
         public List<PowerObject> GetPowerParts(VentSettingViewModel ventSettingVM)
         {
-            DataClass ventPowerData = ventSettingVM.GetPowerData();
-            List<PowerObject> ventPowerParts = new List<PowerObject>();
+            var ventPowerParts = new List<PowerObject>();
+            DataClass ventPowerData = ventSettingVM.GetPowerData();            
             if (ventPowerData.StringData[0] == "Да" && ventPowerData.StringData[1] == "Да")
             {
                 if (ventPowerData.StringData[3] == "Да")                                   // Начало работы с ПЧ/прямой пуск
@@ -212,12 +212,12 @@ namespace BMC.Model
         /// 
         public static List<PowerObject> GetPCH(int ventPower, string drivePower)
         {
-            List<PowerObject> result = new List<PowerObject>();
+            var result = new List<PowerObject>();
             double pumpPower = Convert.ToDouble(drivePower);
             using(var db = new VentContext())
             {
                 var atv = db.ATVs212.Where(p=>p.ElecPower==ventPower&&p.PumpPower>=pumpPower).ToList();
-                foreach(ATV212 p in atv)
+                foreach(var p in atv)
                 {
                     result.Add(new PowerObject(p.PCH, 1));
                 }

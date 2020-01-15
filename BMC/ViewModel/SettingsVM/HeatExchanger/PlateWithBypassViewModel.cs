@@ -26,7 +26,7 @@ namespace BMC.ViewModel
         
         public override DataClass GetPowerData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.IntData.Add(SelectedPower);
             return result;
         }

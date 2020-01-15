@@ -35,7 +35,7 @@ namespace BMC.ViewModel
 
         private static List<string> GetControl()
         {
-            List<string> result = new List<string> { "Двухпозиционное", "0-10В" };
+            var result = new List<string> { "Двухпозиционное", "0-10В" };
             return result;
         }
         #endregion
@@ -63,7 +63,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetControlData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.StringData.Add(BoolToStringConverter.BTS((bool)IsSelectedExhausted));
             result.StringData.Add(BoolToStringConverter.BTS((bool)IsSelectedForced));
             return result;
@@ -75,7 +75,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetPowerData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.StringData.Add(SelectedControl);
             result.StringData.Add(BoolToStringConverter.BTS((bool)SpringReturn));
             if (IsSelectedExhausted == true)

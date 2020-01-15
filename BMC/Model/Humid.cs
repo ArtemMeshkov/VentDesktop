@@ -24,7 +24,7 @@ namespace BMC.Model
         /// <returns></returns>
         public List<int> GetPins(HumidViewModel humidVM)
         {
-            HoneyCombsModel honeyCombsM = new HoneyCombsModel();
+            var honeyCombsM = new HoneyCombsModel();
             DataClass humidControlData = humidVM.GetControlData();
             Type = humidControlData.StringData[0];
             AI += 2;   //humid sensors
@@ -52,14 +52,14 @@ namespace BMC.Model
                 AO += 1;
                 DO += 1;
             }
-            List<int> result = new List<int> { AO, DO, AI, DI };
+            var result = new List<int> { AO, DO, AI, DI };
             return result;
         }
         
         public List<PowerObject> GetPowerParts(HumidViewModel humidVM)
         {
             DataClass humidPowerData = humidVM.GetPowerData();
-            List<PowerObject> humidPower = new List<PowerObject>();
+            var humidPower = new List<PowerObject>();
             //метод управления или выбора автомата/трансформатора для клапана?
             return humidPower;
         }

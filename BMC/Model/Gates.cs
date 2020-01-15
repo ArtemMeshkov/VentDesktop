@@ -34,13 +34,13 @@ namespace BMC.Model
                 DO += 1;
             if (gateControlData.StringData[1] == "Да")
                 DO += 1;
-            List<int> result = new List<int> { AO, DO, AI, DI };
+            var result = new List<int> { AO, DO, AI, DI };
             return result;
         }
 
         public List<PowerObject> GetPowerParts(GatesViewModel gateVM)
         {
-            List<PowerObject> gatePower = new List<PowerObject>();
+            var gatePower = new List<PowerObject>();
             DataClass gatePowerData = gateVM.GetPowerData();
             if (gatePowerData.IntData[0] != 0) {
                 if (gatePowerData.StringData[0] == "Двухпозиционное") { }

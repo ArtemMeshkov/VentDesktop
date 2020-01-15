@@ -44,7 +44,7 @@
                     <TextBlock TextWrapping="Wrap" TextAlignment="Center">Максимальная мощность ступени</TextBlock>
                 </Label.Content>
             </Label>
-            <Slider x:Name="mySlider" Value="{Binding SelectedValue}" Margin="10,40,15,10" Maximum="41" IsSnapToTickEnabled="True" Ticks="{Binding mass,Mode=TwoWay}">
+            <Slider x:Name="mySlider" Value="{Binding SelectedValue}" Margin="10,40,15,10" Maximum="41" IsSnapToTickEnabled="True" Ticks="{Binding Arr,Mode=TwoWay}">
             </Slider>
             <WrapPanel Margin="10,5">
                 <Label Content="Мощность ступени, кВт" FontSize="14"/>

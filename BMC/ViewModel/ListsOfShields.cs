@@ -149,7 +149,12 @@ namespace BMC.ViewModel
         {
             int index = SelectedIndexNew;
             if (index >= 0)
-                NewShieldList.RemoveAt(index);
+            {
+                if (SelectedShield.Number == 1)
+                    NewShieldList.RemoveAt(index);
+                else
+                    SelectedShield.Number--;
+            }
             else
                 MessageBox.Show("Выберите элемент, который хотите удалить!", "Ошибка");
            //Доделать реализацию удаления одного элемента, а не всех из коллекции
@@ -158,23 +163,24 @@ namespace BMC.ViewModel
 
         private void GetItem()
         {
-            Shield selectedShield = SelectedShield;
+            var selectedShield = SelectedShield;
             if(selectedShield!=null)
-            MessageBox.Show("Выбранная конфигурация - DI = " +selectedShield.GetControlInfo()[0].ToString()+ " DO = " + selectedShield.GetControlInfo()[1].ToString() + " AI = " + selectedShield.GetControlInfo().ToString()+ " AO = " + selectedShield.GetControlInfo().ToString());
+            MessageBox.Show("Выбранная конфигурация - DI = " +selectedShield.GetControlInfo()[0].ToString()+ 
+                " DO = " + selectedShield.GetControlInfo()[1].ToString() + " AI = " + selectedShield.GetControlInfo().ToString()+ " AO = " + selectedShield.GetControlInfo().ToString());
         }
 
         private void GetFullInfo()
         {
-            List<int> result = new List<int> { 0, 0, 0, 0 };
+            var result = new List<int> { 0, 0, 0, 0 };
             ObservableCollection<Shield> shields = NewShieldList;
-            foreach (Shield p in shields)
+            foreach (var p in shields)
             {
                 for (int i = 0; i <= 3; i++)
                 {
                     result[i] += p.GetControlInfo()[i];
                 }
             }
-            AllPartsData newSbor = new AllPartsData();
+            var newSbor = new AllPartsData();
             var control = newSbor.GetControlParts(result[0], result[1], result[2], result[3]); // Для теста
             MessageBox.Show("Выбранная конфигурация - DI = " + result[0] + " DO = " + result[1] + " AI = " + result[2] + " AO = " + result[3]);
         }
@@ -182,7 +188,7 @@ namespace BMC.ViewModel
         private void AddItem()
         {
             int count = 0;
-            Shield systemShield = new Shield();
+            var systemShield = new Shield();
             if (!String.IsNullOrEmpty(SystemName))
             {
                 systemShield.Name = SystemName;

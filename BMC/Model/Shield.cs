@@ -26,14 +26,14 @@ namespace BMC.Model
         #region Get Methods
         public List<int> GetControlInfo()
         {
-            AllPartsData controlSbor = new AllPartsData();
+            var controlSbor = new AllPartsData();
             ControlList = controlSbor.GetAllControlData();
             return ControlList;
         }
 
         public List<PowerObject> GetPowerInfo()
         {
-            AllPartsData powerSbor = new AllPartsData();
+            var powerSbor = new AllPartsData();
             PowerList = powerSbor.GetAllPowerData();
             return PowerList;
         }

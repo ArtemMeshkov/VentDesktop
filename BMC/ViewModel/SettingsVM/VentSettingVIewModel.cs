@@ -60,7 +60,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetControlData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             MainWindowVM instance = MainWindowVM.GetInstance();
             if (instance.ExhaustedIsChecked){
                 result.StringData.Add("Да");
@@ -104,7 +104,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetPowerData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             MainWindowVM instance = MainWindowVM.GetInstance();
             if (instance.ExhaustedIsChecked)
             {

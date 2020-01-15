@@ -19,25 +19,26 @@ namespace BMC.Model
         public List<int> GetAllControlData()
         {
             FullResult = new List<int> { 0, 0, 0, 0 };
-            List<int> result1 = new List<int> { 0, 0, 0, 0 };
-            List<int> result2 = new List<int> { 0, 0, 0, 0 };
-            List<int> result3 = new List<int> { 0, 0, 0, 0 };
-            List<int> result4 = new List<int> { 0, 0, 0, 0 };
-            List<int> result5 = new List<int> { 0, 0, 0, 0 };
-            List<int> result6 = new List<int> { 0, 0, 0, 0 };
-            List<int> result7 = new List<int> { 0, 0, 0, 0 };
+            var result1 = new List<int> { 0, 0, 0, 0 };
+            var result2 = new List<int> { 0, 0, 0, 0 };
+            var result3 = new List<int> { 0, 0, 0, 0 };
+            var result4 = new List<int> { 0, 0, 0, 0 };
+            var result5 = new List<int> { 0, 0, 0, 0 };
+            var result6 = new List<int> { 0, 0, 0, 0 };
+            var result7 = new List<int> { 0, 0, 0, 0 };
             MainWindowVM instanceMainWindow = MainWindowVM.GetInstance();
-            SettingModel settingModelInstance = new SettingModel();
-            Cooler coolerModelInstance = new Cooler();
-            Heater heaterModelInstance = new Heater();
-            Filters filterModelInstance = new Filters();
-            VentSettings ventModelInstance = new VentSettings();
-            Gates gatesModelInstance = new Gates();
-            HeatExchange heatExchangeModelInstance = new HeatExchange();
-            Humid humidModelInstance = new Humid();
-            Recirc recircModelInstance = new Recirc();
+            var settingModelInstance = new SettingModel();
+            var coolerModelInstance = new Cooler();
+            var heaterModelInstance = new Heater();
+            var filterModelInstance = new Filters();
+            var ventModelInstance = new VentSettings();
+            var gatesModelInstance = new Gates();
+            var heatExchangeModelInstance = new HeatExchange();
+            var humidModelInstance = new Humid();
+            var recircModelInstance = new Recirc();
             List<int> result = settingModelInstance.GetPins(instanceMainWindow.SettingVM);
             DataClass selectedParts = instanceMainWindow.FullVM.GetControlData();
+
             List<int> result8 = ventModelInstance.GetPins(instanceMainWindow.VentVM);
             if (selectedParts.StringData[1] == "Да")
                 result1 = coolerModelInstance.GetPins(instanceMainWindow.CoolerVM);
@@ -56,7 +57,7 @@ namespace BMC.Model
 
             for (int i = 0; i <= 3; i++)
                 FullResult[i] += result[i] + result1[i] + result2[i] + result3[i] + result4[i] + result5[i] + result6[i] + result7[i]+result8[i];
-            List<int> swappingList = new List<int> { (FullResult[0] + AOstat), (FullResult[1] + DOstat), (FullResult[2] + AIstat), (FullResult[3] + DIstat) };
+            var swappingList = new List<int> { (FullResult[0] + AOstat), (FullResult[1] + DOstat), (FullResult[2] + AIstat), (FullResult[3] + DIstat) };
             FullResult[0] = swappingList[3];
             FullResult[1] = swappingList[1];
             FullResult[2] = swappingList[2];
@@ -67,7 +68,7 @@ namespace BMC.Model
         public List<string> GetControlParts(int DI,int DO,int AI,int AO)
         {
             GetAllControlData();
-            ControlChoosingMathModel mathModel = new ControlChoosingMathModel();
+            var mathModel = new ControlChoosingMathModel();
             List<string> newResult = mathModel.GetMathModel(DI, DO, AI, AO);
             return newResult;
         }

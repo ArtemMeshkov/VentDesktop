@@ -36,9 +36,9 @@ namespace BMC.Model
         /// <returns></returns>
         public List<int> GetPins(CoolerViewModel coolerVM)
         {
-            Heater heaterM = new Heater();
-            LiquidModel liquidM = new LiquidModel();
-            ElectricModel electricM = new ElectricModel();
+            var heaterM = new Heater();
+            var liquidM = new LiquidModel();
+            var electricM = new ElectricModel();
             DataClass coolerControlData = coolerVM.GetControlData();
             Type = coolerControlData.StringData[0];
             Dryer = coolerControlData.StringData[1];
@@ -70,7 +70,7 @@ namespace BMC.Model
                 else
                 {
                     electricM.FirstStage = coolerControlData.StringData[4];
-                    electricM.NumOfStages = coolerControlData.IntData[1];
+                    electricM.NumOfStages = coolerControlData.IntData[1]; 
                     electricM.ThermoSwitch = coolerControlData.IntData[2];
                     if (electricM.FirstStage == "Да")
                         AO += 1;
@@ -78,14 +78,14 @@ namespace BMC.Model
                     DI += electricM.ThermoSwitch;
                 }
             }
-            List<int> result = new List<int> { AO, DO, AI, DI };
+            var result= new List<int> { AO, DO, AI, DI };
             return result;
         }
         public List<PowerObject> GetPowerParts(CoolerViewModel coolerVM)
         {
             DataClass coolerControlData = coolerVM.GetControlData();
             DataClass coolerPowerData = coolerVM.GetPowerData();
-            List<PowerObject> result = new List<PowerObject>();
+            var result = new List<PowerObject>();
             ExtraHeater = coolerControlData.StringData[2];
             if (coolerControlData.StringData[0] == "Жидкостный")
             {

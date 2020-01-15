@@ -29,7 +29,7 @@ namespace BMC.Model
                 DO -= 1;
                 DI -= 1;
             }
-            List<int> result = new List<int> { AO, DO, AI, DI };
+            var result = new List<int> { AO, DO, AI, DI };
             return result;
         }
         public List<PowerObject> GetPower(RecircViewModel recircVM)

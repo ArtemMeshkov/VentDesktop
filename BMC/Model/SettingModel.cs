@@ -20,7 +20,7 @@ namespace BMC.Model
         #region Get Methods
         public static List<string> GetTypes()
         {
-            List<string> result = new List<string> { "Комнатный", "Канальный" };
+            var result = new List<string> { "Комнатный", "Канальный" };
             return result;
         }
         public List<int> GetPins(SettingViewModel settingVM)

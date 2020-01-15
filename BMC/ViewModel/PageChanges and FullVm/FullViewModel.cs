@@ -290,7 +290,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetControlData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.StringData.Add(SelectedValueHeater);
             result.StringData.Add(SelectedValueCooler);
             result.StringData.Add(SelectedValueHumid);

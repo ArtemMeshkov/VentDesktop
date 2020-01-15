@@ -60,7 +60,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetControlData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.IntData.Add(SelectedNumOfStages);
             result.IntData.Add(SelectedThermoSwitch);
             if(PCHChecked!=null)
@@ -77,7 +77,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetPowerData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.IntData.Add(SelectedIntValue);  //value of powerstage
             result.IntData.Add(SelectedNumOfStages);
             result.StringData.Add(BoolToStringConverter.BTS((bool)PCHChecked));

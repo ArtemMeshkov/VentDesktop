@@ -42,7 +42,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetControlData()
         {
-            DataClass result = new DataClass(); 
+            var result = new DataClass(); 
             result.IntData.Add(SelectedNumOfStages);
             result.StringData.Add(SelectedWaterTypes);
             result.StringData.Add(BoolToStringConverter.BTS((bool)ByPass));
@@ -60,7 +60,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetPowerData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.StringData.Add(BoolToStringConverter.BTS((bool)ByPass));
             result.IntData.Add(SelectedNumOfStages);
             return result;

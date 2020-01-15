@@ -27,8 +27,8 @@ namespace BMC.Model
         /// </summary>
         public List<int> GetPins(HeatExchangeViewModel heatExchangeVM)
         {
-            Glycol glycolM = new Glycol();
-            Rotor rotorM = new Rotor();
+            var glycolM = new Glycol();
+            var rotorM = new Rotor();
            // PlateWithBypass plateBP = new PlateWithBypass();
             DataClass heatExchangeControlData = heatExchangeVM.GetControlData();
             Type = heatExchangeControlData.StringData[0];
@@ -56,7 +56,7 @@ namespace BMC.Model
                     AI += 2;
                 }
             }            
-            List<int> result = new List<int> { AO, DO, AI, DI };
+            var result = new List<int> { AO, DO, AI, DI };
             return result;
         }
 
@@ -64,7 +64,7 @@ namespace BMC.Model
         {
             DataClass heatExchangeControlData = heatExchangerVM.GetControlData();
             DataClass heatExchangePowerData = heatExchangerVM.GetPowerData();
-            List<PowerObject> heatExchangeResult = new List<PowerObject>();
+            var heatExchangeResult = new List<PowerObject>();
             if (heatExchangeControlData.StringData[0] == "Роторный")
             {
                 if (heatExchangePowerData.StringData[1] == "Частотный преобразователь")

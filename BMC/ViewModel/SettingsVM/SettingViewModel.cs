@@ -40,7 +40,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetControlData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.StringData.Add(BoolToStringConverter.BTS((bool)PhaseCheck));
             result.StringData.Add(BoolToStringConverter.BTS((bool)OperatorPanel));
             result.StringData.Add(BoolToStringConverter.BTS((bool)TempOut));

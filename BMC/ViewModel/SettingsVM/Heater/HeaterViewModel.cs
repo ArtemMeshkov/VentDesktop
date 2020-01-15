@@ -152,7 +152,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetControlData()
         {
-            DataClass heaterResult = new DataClass();
+            var heaterResult = new DataClass();
             heaterResult.StringData.Add(SelectedValueHeaterVar);
             if (SelectedValueHeaterVar == HeaterList[1])
             {
@@ -189,7 +189,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetPowerData()
         {
-            DataClass heaterResult = new DataClass();
+            var heaterResult = new DataClass();
             if (SelectedValueHeaterVar == HeaterList[1])
             {
                 DataClass electricPower = ElectricalVM.GetPowerData();

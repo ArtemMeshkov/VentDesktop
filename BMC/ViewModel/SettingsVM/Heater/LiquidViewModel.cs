@@ -33,7 +33,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetControlData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.StringData.Add(BoolToStringConverter.BTS((bool)IsCheckedAirTemp));
             return result;
         }
@@ -43,7 +43,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetPowerData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.IntData.Add(SelectedPumpPower);
             result.IntData.Add(SelectedValvePower);
             result.StringData.Add(BoolToStringConverter.BTS((bool)IsCheckedAirTemp));

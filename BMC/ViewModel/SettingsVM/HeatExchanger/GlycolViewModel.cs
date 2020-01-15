@@ -31,7 +31,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetControlData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.StringData.Add(BoolToStringConverter.BTS((bool)IsVentChecked));
             return result;
 
@@ -44,7 +44,7 @@ namespace BMC.ViewModel
         /// <returns></returns>
         public override DataClass GetPowerData()
         {
-            DataClass result = new DataClass();
+            var result = new DataClass();
             result.IntData.Add(SelectedValvePower);
             result.IntData.Add(SelectedDrivePower);
             return result;
