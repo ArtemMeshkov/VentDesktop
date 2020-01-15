@@ -141,6 +141,7 @@ namespace BMC.ViewModel
             CurrentPageExtraHeaterViewModel = PageViewExtraHeaterModels[0];
             CurrentPageHeaterViewModel = PageViewHeaterModels[0];
             SelectedValueHeaterVar = HeaterList[0];
+            ExtraHeater = false;
         }
         #endregion
 

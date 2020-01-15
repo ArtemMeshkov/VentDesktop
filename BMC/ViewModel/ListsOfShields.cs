@@ -150,10 +150,10 @@ namespace BMC.ViewModel
             int index = SelectedIndexNew;
             if (index >= 0)
             {
-                if (NewShieldList[SelectedIndexNew].Number == 1)
+                if (NewShieldList[index].Number == 1)
                     NewShieldList.RemoveAt(index);
                 else
-                    NewShieldList[SelectedIndexNew].Number--;
+                    NewShieldList[index].Number--;
             }
             else
                 MessageBox.Show("Выберите элемент, который хотите удалить!", "Ошибка");
@@ -177,7 +177,7 @@ namespace BMC.ViewModel
             {
                 for (int i = 0; i <= 3; i++)
                 {
-                    result[i] += p.GetControlInfo()[i];
+                    result[i] += p.GetControlInfo()[i]*p.Number;
                 }
             }
             var newSbor = new AllPartsData();
