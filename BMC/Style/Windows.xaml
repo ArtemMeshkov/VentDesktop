@@ -38,7 +38,7 @@
                                     </LinearGradientBrush>
                                 </Border.Background>
                             </Border>
-                            <Label Grid.Row="0" Content="On postoyanno"/>
+                           
                             <Border Grid.Row="1" Margin="10 0">
                                 <ContentPresenter Content="{TemplateBinding Content}"/>
                             </Border>
