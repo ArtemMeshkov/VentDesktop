@@ -150,10 +150,10 @@ namespace BMC.ViewModel
             int index = SelectedIndexNew;
             if (index >= 0)
             {
-                if (SelectedShield.Number == 1)
+                if (NewShieldList[SelectedIndexNew].Number == 1)
                     NewShieldList.RemoveAt(index);
                 else
-                    SelectedShield.Number--;
+                    NewShieldList[SelectedIndexNew].Number--;
             }
             else
                 MessageBox.Show("Выберите элемент, который хотите удалить!", "Ошибка");
