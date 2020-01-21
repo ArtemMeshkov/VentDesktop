@@ -7,6 +7,7 @@ namespace DifferentShapesArea
     public class UnknownShape : IShape
     {
         private IShape _shape;
+
         public double GetArea()
         {
             return _shape.GetArea();
